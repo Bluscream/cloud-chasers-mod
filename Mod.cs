@@ -51,39 +51,9 @@ namespace StormTweakers {
         public override void OnLateUpdate() {
             if (InputManager.GetKeyDown(KeyCode.F6)) {
                 try { mainPanel.Toggle(); } catch { mainPanel.SetActive(!mainPanel.Enabled); }
+            } else if (InputManager.GetKeyDown(KeyCode.Home)) {
+                menuTweaks.JoinOnlineGame();
             }
-            //if (GetKeyDownMethod == null) return;
-            //if (GetKeyDown("home")) {
-            //    JoinOnlineGame();
-            //} else if (GetKeyDown("f1")) {
-            //    GameController.Instance.updateGPSCameras();
-            //    Log("Updated GPS Cameras");
-            //    //GameController.Instance.respawnCar(1);
-            //    var localPlayer = GameController.Instance.getLocalPlayer();
-            //    SetPlayerInvincible(localPlayer);
-            //    onlineInactivityTime.SetValue(localPlayer, 99999f);
-            //    Log($"Set onlineInactivityTime to 99999f");
-            //    carInForbiddenZoneMaxTime.SetValue(localPlayer, 99999f);
-            //    Log($"Set carInForbiddenZoneMaxTime to 99999f");
-            //    var myTruck = GameController.Instance.getLocalCar();
-            //    RepairTruck(myTruck);
-            //    myTruck.fuelConsomption = 0f;
-            //    Log($"Set fuelConsomption to {myTruck.fuelConsomption}");
-            //    var owner = GameManager.Instance.photonView.owner.NickName;
-            //    Log($"Owner: {owner}");
-            //} else if (GetKeyDown("insert")) {
-            //    TeleportTruckToPlayer();
-            //} else if (GetKeyDown("delete")) {
-            //    TeleportPlayerToTruck();
-            //} else if (GetKeyDown("f6")) {
-            //    SetTruckSpeed(1000f);
-            //} else if (GetKeyDown("f8")) {
-            //    ToggleTruckControl();
-            //} else if (GetKeyDown("f9")) {
-            //    ListRooms();
-            //} else if (GetKeyDown("f10")) {
-            //    ListPlayers();
-            //}
             //else if (GetKeyDown("leftarrow")) {
             //    var myTruck = GameController.Instance.getLocalCar();
             //    var oldValue = (bool)leftSignalLightOn.GetValue(myTruck);

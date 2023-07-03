@@ -15,6 +15,7 @@ namespace StormChasers {
         public override Vector2 DefaultAnchorMin => new Vector2(0.25f, 0.25f);
         public override Vector2 DefaultAnchorMax => new Vector2(0.75f, 0.75f);
         public override bool CanDragAndResize => true;
+        public static Slider truckSpeedSlider;
 
         internal void AddButton(string text, Action action) {
             ButtonRef btn = UIFactory.CreateButton(ContentRoot, null, text);
@@ -35,11 +36,10 @@ namespace StormChasers {
 
             Text truckSpeedTXT = UIFactory.CreateLabel(ContentRoot, "", "Truck Speed");
             //UIFactory.SetLayoutElement(myText.gameObject, minWidth: 200, minHeight: 25);
-            Slider truckSpeedSlider;
             var truckSpeedSliderObj = UIFactory.CreateSlider(ContentRoot, "Truck Speed", out truckSpeedSlider);
             truckSpeedSlider.minValue = 0f;
-            truckSpeedSlider.maxValue = 200f;
-            truckSpeedSlider.value = 100f;
+            truckSpeedSlider.maxValue = 99999f;
+            truckSpeedSlider.value = 27.78f;
             truckSpeedSlider.onValueChanged.AddListener((float value) => { Mod.truckTweaks.SetTruckSpeed(value); });
             UIFactory.SetLayoutElement(truckSpeedSliderObj, minWidth: 200, minHeight: 25);
 
