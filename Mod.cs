@@ -19,7 +19,7 @@ namespace StormTweakers {
         internal static void Log(object message, LogType type = LogType.Log) {
             var msg = message.ToString();
             MelonLogger.Msg(msg);
-            try { GameController.Instance.sendChatInfoText(msg); } catch { }
+            try { GameController.Instance.getLocalPlayer().think(msg); } catch { }
         }
 
         public override void OnInitializeMelon() {
