@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace StormTweakers {
     internal partial class TruckTweaks : MelonMod {
-        private static readonly FieldInfo carInForbiddenZoneMaxTime = typeof(Player).GetField("carInForbiddenZoneMaxTime", BindingFlags.NonPublic | BindingFlags.Instance);
-        private static readonly FieldInfo onlineInactivityTime = typeof(Player).GetField("onlineInactivityTime", BindingFlags.NonPublic | BindingFlags.Instance);
+        //private static readonly FieldInfo carInForbiddenZoneMaxTime = typeof(Player).GetField("carInForbiddenZoneMaxTime", BindingFlags.NonPublic | BindingFlags.Instance);
+        //private static readonly FieldInfo onlineInactivityTime = typeof(Player).GetField("onlineInactivityTime", BindingFlags.NonPublic | BindingFlags.Instance);
         private static readonly FieldInfo vehicleController = typeof(CarTornado).GetField("vehicleController", BindingFlags.NonPublic | BindingFlags.Instance);
         private static readonly FieldInfo onlineSpeed = typeof(CarTornado).GetField("onlineSpeed", BindingFlags.NonPublic | BindingFlags.Instance);
         //private static readonly FieldInfo leftSignalLightOn = typeof(RealisticCarController).GetField("leftSignalLightOn", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -23,8 +23,19 @@ namespace StormTweakers {
             if (truck is null) truck = GameController.Instance.getLocalCar();
             truck.repairCar();
             Mod.Log($"Repaired truck");
-            truck.fuel = 150f;
-            Mod.Log($"Set fuel to {truck.fuel}");
+        }
+        internal void RefuelTruck(float fuel = 100f, CarTornado truck = null) {
+            if (Mod.isOnline()) return;
+            if (truck is null) truck = GameController.Instance.getLocalCar();
+            Mod.Log($"Set fuel from {truck.fuel} to {fuel}");
+            truck.fuel = fuel;
+        }
+
+        internal void SetFuelConsumption(float consumption = .5f, CarTornado truck = null) {
+            if (Mod.isOnline()) return;
+            if (truck is null) truck = GameController.Instance.getLocalCar();
+            Mod.Log($"Set truck consumption from {truck.fuelConsomption} to {consumption}");
+            truck.fuelConsomption = consumption;
         }
 
         internal void SetTruckSpeed(float speed = 27.78f, CarTornado truck = null) {

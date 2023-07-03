@@ -1,14 +1,20 @@
 ﻿using MelonLoader;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UniverseLib;
 using UniverseLib.UI;
 using UniverseLib.Input;
 using StormChasers;
+using System.Collections.Generic;
+using UniverseLib.Utility;
 
 namespace StormTweakers {
 
     internal partial class Mod : MelonMod {
+        MelonPreferences_Category cfg_general;
+        MelonPreferences_Entry skip_intro;
         MainPanel mainPanel;
         internal bool fullyLoaded = false;
         internal static MenuTweaks menuTweaks = new MenuTweaks();
@@ -19,19 +25,25 @@ namespace StormTweakers {
         internal static void Log(object message, LogType type = LogType.Log) {
             var msg = message.ToString();
             MelonLogger.Msg(msg);
-            try { GameController.Instance.getLocalPlayer().think(msg); } catch { }
+            // try { GameController.Instance.getLocalPlayer().think(msg); } catch { }
         }
 
         public override void OnInitializeMelon() {
             Log("OnInitializeMelon");
+            cfg_general = MelonPreferences.CreateCategory("StormTweakers", "StormTweakers");
+            skip_intro = cfg_general.CreateEntry("skip_intro", true, "Automatically skip intros");
         }
 
-        public override void OnSceneWasInitialized(int buildindex, string sceneName)
-        {
+        public override void OnSceneWasInitialized(int buildindex, string sceneName) {
             Log($"OnSceneWasInitialized: {buildindex} \"{sceneName}\"");
             if (!fullyLoaded && sceneName == "Main Menu") {
                 fullyLoaded = true;
                 OnMainMenuLoaded();
+            } else if (sceneName == "Splash" && (bool)skip_intro.BoxedValue) {
+                SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+            } else if (sceneName == "Game") {
+                MainPanel.PopulatePlayers();
+                MainPanel.PopulateTrucks();
             }
         }
 
@@ -44,7 +56,7 @@ namespace StormTweakers {
         internal void OnUniverseLibInitialized() {
             Log("OnUniverseLibInitialized");
             UIBase myUIBase = UniversalUI.RegisterUI("bluscream.stormtweakers", () => { });
-            mainPanel = new MainPanel(myUIBase) { Enabled = false};
+            mainPanel = new MainPanel(myUIBase) { Enabled = false };
             //mainPanel.SetActive(false);
         }
 
@@ -109,3 +121,47 @@ namespace StormTweakers {
         //}
     }
 }
+
+
+
+            //if (GetKeyDownMethod == null) return;
+            //if (GetKeyDown("home")) {
+            //    JoinOnlineGame();
+            //} else if (GetKeyDown("f1")) {
+            //    GameController.Instance.updateGPSCameras();
+            //    Log("Updated GPS Cameras");
+            //    //GameController.Instance.respawnCar(1);
+            //    var localPlayer = GameController.Instance.getLocalPlayer();
+            //    SetPlayerInvincible(localPlayer);
+            //    onlineInactivityTime.SetValue(localPlayer, 99999f);
+            //    Log($"Set onlineInactivityTime to 99999f");
+            //    carInForbiddenZoneMaxTime.SetValue(localPlayer, 99999f);
+            //    Log($"Set carInForbiddenZoneMaxTime to 99999f");
+            //    var myTruck = GameController.Instance.getLocalCar();
+            //    RepairTruck(myTruck);
+            //    myTruck.fuelConsomption = 0f;
+            //    Log($"Set fuelConsomption to {myTruck.fuelConsomption}");
+            //    var owner = GameManager.Instance.photonView.owner.NickName;
+            //    Log($"Owner: {owner}");
+            //} else if (GetKeyDown("insert")) {
+            //    TeleportTruckToPlayer();
+            //} else if (GetKeyDown("delete")) {
+            //    TeleportPlayerToTruck();
+            //} else if (GetKeyDown("f6")) {
+            //    SetTruckSpeed(1000f);
+            //} else if (GetKeyDown("f8")) {
+            //    ToggleTruckControl();
+            //} else if (GetKeyDown("f9")) {
+            //    ListRooms();
+            //} else if (GetKeyDown("f10")) {
+            //    ListPlayers();
+            //}
+            //else if (GetKeyDown("leftarrow")) {
+            //    var myTruck = GameController.Instance.getLocalCar();
+            //    var oldValue = (bool)leftSignalLightOn.GetValue(myTruck);
+            //    leftSignalLightOn.SetValue(myTruck, !oldValue);
+            //} else if (GetKeyDown("rightarrow")) {
+            //    var myTruck = GameController.Instance.getLocalCar();
+            //    var oldValue = (bool)rightSignalLightOn.GetValue(myTruck);
+            //    rightSignalLightOn.SetValue(myTruck, !oldValue);
+            //}

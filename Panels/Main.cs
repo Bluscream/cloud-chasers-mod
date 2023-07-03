@@ -4,6 +4,8 @@ using UniverseLib.UI;
 using UnityEngine.UI;
 using StormTweakers;
 using System;
+using System.Linq;
+using UniverseLib.Utility;
 
 namespace StormChasers {
     internal class MainPanel : UniverseLib.UI.Panels.PanelBase {
@@ -16,11 +18,49 @@ namespace StormChasers {
         public override Vector2 DefaultAnchorMax => new Vector2(0.75f, 0.75f);
         public override bool CanDragAndResize => true;
         public static Slider truckSpeedSlider;
+        public static Dropdown truckDropdown;
+        public static Dropdown playerDropdown;
 
         internal void AddButton(string text, Action action) {
             ButtonRef btn = UIFactory.CreateButton(ContentRoot, null, text);
             UIFactory.SetLayoutElement(btn.Component.gameObject, minWidth: 200, minHeight: 25);
             btn.OnClick += action;
+        }
+
+        internal void AddSlider(string text, float value = 50f, float minValue = 0f, float maxValue = 100f, UnityEngine.Events.UnityAction<float> action = null) {
+            Text sliderTxt = UIFactory.CreateLabel(ContentRoot, "", text);
+            //UIFactory.SetLayoutElement(myText.gameObject, minWidth: 200, minHeight: 25);
+            var sliderObj = UIFactory.CreateSlider(ContentRoot, "", out truckSpeedSlider);
+            truckSpeedSlider.minValue = minValue;
+            truckSpeedSlider.maxValue = maxValue;
+            truckSpeedSlider.value = value;
+            truckSpeedSlider.onValueChanged.AddListener(action);
+            UIFactory.SetLayoutElement(sliderObj, minWidth: 200, minHeight: 25);
+        }
+
+        internal void PopulateDropdown(Dropdown dropdown, string[] options, int defaultIndex = 0) {
+            dropdown.ClearOptions();
+            dropdown.AddOptions(options.ToList());
+            dropdown.value = defaultIndex;
+        }
+
+        internal void AddToDropdown(Dropdown dropdown, string option) {
+            dropdown.options.Add(new Dropdown.OptionData(option));
+        }
+
+        internal static void PopulatePlayers() {
+            playerDropdown.ClearOptions();
+            foreach (var player in GameController.Instance.otherPlayers) {
+                playerDropdown.options.Add(new Dropdown.OptionData(player.photonView.owner.NickName));
+            }
+        }
+
+        internal static void PopulateTrucks() {
+            truckDropdown.ClearOptions();
+            foreach (var player in GameController.Instance.otherPlayers) {
+                var car = player.getInteractCar();
+                truckDropdown.options.Add(new Dropdown.OptionData(car.photonView.owner.NickName));
+            }
         }
 
         protected override void ConstructPanelContent() {
@@ -30,18 +70,17 @@ namespace StormChasers {
             AddButton("List Rooms", () => { Mod.debugTweaks.ListRooms(); });
             #endregion
             #region Truck
+//CreateDropdown(GameObject parent, string name, out Dropdown dropdown, string defaultItemText, int itemFontSize, Action<int> onValueChanged, string[] defaultOptions = null) {
+            var truckDropObj = UIFactory.CreateDropdown(ContentRoot, "", out truckDropdown, "None / Local", 15, (int val) => { });
+            UIFactory.SetLayoutElement(truckDropObj, minWidth: 200, minHeight: 25);
+
             AddButton("Repair Truck", () => { Mod.truckTweaks.RepairTruck(); });
+            AddSlider("Truck Fuel", 100f, 0f, 200f, (float val) => { Mod.truckTweaks.RefuelTruck(val); });
+            AddSlider("Truck Fuel Consumption", .5f, 0f, 2f, (float val) => { Mod.truckTweaks.SetFuelConsumption(val); });
             AddButton("Teleport Player to Truck", () => { Mod.truckTweaks.TeleportPlayerToTruck(); });
             AddButton("Teleport Truck to Player", () => { Mod.truckTweaks.TeleportTruckToPlayer(); });
 
-            Text truckSpeedTXT = UIFactory.CreateLabel(ContentRoot, "", "Truck Speed");
-            //UIFactory.SetLayoutElement(myText.gameObject, minWidth: 200, minHeight: 25);
-            var truckSpeedSliderObj = UIFactory.CreateSlider(ContentRoot, "Truck Speed", out truckSpeedSlider);
-            truckSpeedSlider.minValue = 0f;
-            truckSpeedSlider.maxValue = 99999f;
-            truckSpeedSlider.value = 27.78f;
-            truckSpeedSlider.onValueChanged.AddListener((float value) => { Mod.truckTweaks.SetTruckSpeed(value); });
-            UIFactory.SetLayoutElement(truckSpeedSliderObj, minWidth: 200, minHeight: 25);
+            AddSlider("Truck Speed", 27.78f, 0f, 9999f, (float val) => { Mod.truckTweaks.SetTruckSpeed(val); });
 
             Toggle truckControlToggle;
             var toggleObj = UIFactory.CreateToggle(ContentRoot, "", out truckControlToggle, out Text text2);
@@ -62,7 +101,8 @@ namespace StormChasers {
             //});
             #endregion
             #region Player
-
+            var playerDropObj = UIFactory.CreateDropdown(ContentRoot, "", out playerDropdown, "None / Local", 15, (int val) => { });
+            UIFactory.SetLayoutElement(playerDropObj, minWidth: 200, minHeight: 25);
             Toggle invincibleToggle;Text text;
             UIFactory.CreateToggle(ContentRoot, "", out invincibleToggle, out text);
             text.text = "Invincible";
