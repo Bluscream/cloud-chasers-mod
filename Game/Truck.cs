@@ -28,7 +28,13 @@ namespace StormHackers {
             if (Mod.isOnline()) return;
             if (truck is null) truck = GameController.Instance.getLocalCar();
             truck.repairCar();
-            Mod.Log($"Repaired truck");
+            Mod.Log($"Repairing truck");
+        }
+        internal void Push(CarTornado truck = null) {
+            if (Mod.isOnline()) return;
+            if (truck is null) truck = GameController.Instance.getLocalCar();
+            truck.startPushingCar();
+            Mod.Log($"Pushing truck");
         }
         internal void Refuel(float fuel = 100f, CarTornado truck = null) {
             if (Mod.isOnline()) return;

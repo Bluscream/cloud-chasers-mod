@@ -50,10 +50,12 @@ namespace StormHackers {
         }
 
         public override void OnLateUpdate() {
-            if (InputManager.GetKeyDown(KeyCode.F6)) {
+            if (InputManager.GetKeyDown(Preferences.ToggleModPanelKey.Value)) {
                 try { mainPanel.Toggle(); } catch { mainPanel.SetActive(!mainPanel.Enabled); }
-            } else if (InputManager.GetKeyDown(KeyCode.Home)) {
+            } else if (InputManager.GetKeyDown(Preferences.QuickJoinKey.Value)) {
                 menuTweaks.JoinOnlineGame();
+            } else if (InputManager.GetKeyDown(Preferences.ToggleLaptopKey.Value)) {
+                GameController.Instance.toggleLaptopMenu();
             }
             //else if (GetKeyDown("leftarrow")) {
             //    var myTruck = GameController.Instance.getLocalCar();

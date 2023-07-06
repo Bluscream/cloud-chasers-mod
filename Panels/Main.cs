@@ -88,6 +88,7 @@ namespace StormChasers {
 
             AddButton("Respawn Truck", () => { Mod.truckTweaks.Respawn(); });
             AddButton("Repair Truck", () => { Mod.truckTweaks.Repair(); });
+            AddButton("Push Truck", () => { Mod.truckTweaks.Push(); });
             AddSlider("Truck Fuel", 100f, 0f, 200f, (float val) => { Mod.truckTweaks.Refuel(val, GetTruckFromDropdown()); });
             AddSlider("Truck Fuel Consumption", .5f, 0f, 2f, (float val) => { Mod.truckTweaks.SetFuelConsumption(val, GetTruckFromDropdown()); });
             AddButton("Teleport Player to Truck", () => { Mod.truckTweaks.TeleportPlayerToTruck(GetPlayerFromDropdown(), GetTruckFromDropdown()); });
