@@ -135,7 +135,7 @@ namespace StormChasers {
             AddButton("Set Level 0", () => { Mod.statsTweaks.SetXP(0); });
             AddButton("Set Level 50", () => { Mod.statsTweaks.SetLevel(50); });
             AddButton("Add 5000 xp", () => { Mod.statsTweaks.AddXP(5000); });
-            AddSlider("Photo Score Multiplier", Preferences.PhotoScoreMultiplier.Value, 0f, 5f, (float val) => { Preferences.PhotoScoreMultiplier.Value = val; });
+            AddSlider("Photo Score Multiplier", Preferences.PhotoScoreMultiplier.Value, 0f, 15f, (float val) => { Preferences.PhotoScoreMultiplier.Value = val; });
             #endregion
             this.SetDefaultSizeAndPosition();
         }
