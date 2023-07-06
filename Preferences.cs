@@ -8,7 +8,10 @@ namespace StormHackers {
         public static MelonPreferences_Entry<bool> DisableEventSystemOverride { get; private set; }
         public static MelonPreferences_Entry<float> StartupDelay { get; private set; }
 
+        public static MelonPreferences_Entry<float> PhotoScoreMultiplier { get; private set; }
+
         public static MelonPreferences_Entry<KeyCode> ToggleModPanelKey { get; private set; }
+        public static MelonPreferences_Entry<KeyCode> ToggleModPanelAltKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> ToggleLaptopKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> QuickJoinKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> TeleportForwardKey { get; private set; }
@@ -27,7 +30,10 @@ namespace StormHackers {
             DisableEventSystemOverride = category.CreateEntry(nameof(DisableEventSystemOverride), true, is_hidden: true);
             StartupDelay = category.CreateEntry(nameof(StartupDelay), 1f, is_hidden: true);
 
+            PhotoScoreMultiplier = category.CreateEntry(nameof(PhotoScoreMultiplier), 1f);
+
             ToggleModPanelKey = category.CreateEntry(nameof(ToggleModPanelKey), KeyCode.F6);
+            ToggleModPanelAltKey = category.CreateEntry(nameof(ToggleModPanelAltKey), KeyCode.None);
             ToggleLaptopKey = category.CreateEntry(nameof(ToggleLaptopKey), KeyCode.M);
             QuickJoinKey = category.CreateEntry(nameof(QuickJoinKey), KeyCode.Home);
 

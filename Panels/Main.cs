@@ -53,9 +53,11 @@ namespace StormChasers {
         internal static void PopulatePlayers() {
             playerDropdown.ClearOptions();
             playerDropdown.options.Add(new Dropdown.OptionData(DefaultDropdownText));
-            playerDropdown.options.Add(new Dropdown.OptionData(GameController.Instance.localPlayer.photonView.owner.NickName));
+            if (GameController.Instance.localPlayer?.photonView?.owner?.NickName != null)
+                playerDropdown.options.Add(new Dropdown.OptionData(GameController.Instance.localPlayer.photonView.owner.NickName));
             foreach (var player in GameController.Instance.otherPlayers) {
-                playerDropdown.options.Add(new Dropdown.OptionData(player.photonView.owner.NickName));
+                if (player?.photonView?.owner?.NickName != null)
+                    playerDropdown.options.Add(new Dropdown.OptionData(player.photonView.owner.NickName));
             }
         }
 
@@ -128,6 +130,12 @@ namespace StormChasers {
             AddButton("Teleport to Wakota", () => { Mod.playerTweaks.TeleportToPos(MapTweaks.mapPositions["wakota"], GetPlayerFromDropdown()); ; });
             AddButton("Teleport to Byron", () => { Mod.playerTweaks.TeleportToPos(MapTweaks.mapPositions["byron"], GetPlayerFromDropdown()); ; });
             AddButton("Teleport to Middle", () => { Mod.playerTweaks.TeleportToPos(MapTweaks.mapPositions["middle"], GetPlayerFromDropdown()); ; });
+            #endregion
+            #region Stats
+            AddButton("Set Level 0", () => { Mod.statsTweaks.SetXP(0); });
+            AddButton("Set Level 50", () => { Mod.statsTweaks.SetLevel(50); });
+            AddButton("Add 5000 xp", () => { Mod.statsTweaks.AddXP(5000); });
+            AddSlider("Photo Score Multiplier", Preferences.PhotoScoreMultiplier.Value, 0f, 5f, (float val) => { Preferences.PhotoScoreMultiplier.Value = val; });
             #endregion
             this.SetDefaultSizeAndPosition();
         }

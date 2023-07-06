@@ -69,9 +69,11 @@
     <Compile Include="Game\Debug.cs" />
     <Compile Include="Game\Map.cs" />
     <Compile Include="Game\Menu.cs" />
+    <Compile Include="Game\Stats.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Panels\Main.cs" />
+    <Compile Include="Patches\GetPhotoScore.cs" />
     <Compile Include="Patches\NoExit.cs" />
     <Compile Include="Preferences.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -16,6 +16,7 @@ namespace StormHackers {
         internal static TruckTweaks truckTweaks = new TruckTweaks();
         internal static DebugTweaks debugTweaks = new DebugTweaks();
         internal static MapTweaks mapTweaks = new MapTweaks();
+        internal static StatsTweaks statsTweaks = new StatsTweaks();
 
         internal static void Log(object message, LogType type = LogType.Log) {
             var msg = message.ToString();
@@ -49,28 +50,28 @@ namespace StormHackers {
             //mainPanel.SetActive(false);
         }
 
-        public static bool GetKeyDown(KeyCode keyCode) {
-            if (keyCode == KeyCode.None) return false;
-            return InputManager.GetKeyDown(keyCode);
-        }
+        //public static bool GetKeyDown(KeyCode keyCode) {
+        //    if (keyCode == KeyCode.None) return false;
+        //    return InputManager.GetKeyDown(keyCode);
+        //}
 
         public override void OnLateUpdate() {
             if (Preferences.ToggleModPanelKey is null || InputManager.CurrentType == InputType.None) return;
-            if (GetKeyDown(Preferences.ToggleModPanelKey.Value)) {
+            if (InputManager.GetKeyDown(Preferences.ToggleModPanelKey.Value) || InputManager.GetKeyDown(Preferences.ToggleModPanelAltKey.Value)) {
                 try { mainPanel.Toggle(); } catch { mainPanel.SetActive(!mainPanel.Enabled); }
-            } else if (GetKeyDown(Preferences.QuickJoinKey.Value)) {
+            } else if (InputManager.GetKeyDown(Preferences.QuickJoinKey.Value)) {
                 menuTweaks.JoinOnlineGame();
-            } else if (GetKeyDown(Preferences.ToggleLaptopKey.Value)) {
+            } else if (InputManager.GetKeyDown(Preferences.ToggleLaptopKey.Value)) {
                 GameController.Instance.toggleLaptopMenu();
-            } else if (GetKeyDown(Preferences.TeleportForwardKey.Value)) {
+            } else if (InputManager.GetKeyDown(Preferences.TeleportForwardKey.Value)) {
                 playerTweaks.TeleportForward(Preferences.TeleportForwardDistance.Value);
-            } else if (GetKeyDown(Preferences.TeleportUpKey.Value)) {
+            } else if (InputManager.GetKeyDown(Preferences.TeleportUpKey.Value)) {
                 playerTweaks.TeleportUp(Preferences.TeleportUpDistance.Value);
-            } else if (GetKeyDown(Preferences.TeleportDownKey.Value)) {
+            } else if (InputManager.GetKeyDown(Preferences.TeleportDownKey.Value)) {
                 playerTweaks.TeleportUp(-Preferences.TeleportDownDistance.Value);
-            } else if (GetKeyDown(Preferences.LeftIndicatorKey.Value)) {
+            } else if (InputManager.GetKeyDown(Preferences.LeftIndicatorKey.Value)) {
                 TruckTweaks.leftIndicatorOn = !TruckTweaks.leftIndicatorOn;
-            } else if (GetKeyDown(Preferences.RightIndicatorKey.Value)) {
+            } else if (InputManager.GetKeyDown(Preferences.RightIndicatorKey.Value)) {
                 TruckTweaks.rightIndicatorOn = !TruckTweaks.rightIndicatorOn;
             }
         }
