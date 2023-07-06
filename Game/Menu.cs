@@ -5,7 +5,7 @@ namespace StormHackers {
     internal partial class MenuTweaks : MelonMod {
         MainUIMenu mainMenu;
         NetworkUIMenu netMenu;
-        public bool wantExit = false;
+        public bool allowExit = false;
         private static readonly MethodInfo joinPublicGame = typeof(NetworkUIMenu).GetMethod("joinPublicGame");
 
         internal void OnMainMenuLoaded() {

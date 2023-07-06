@@ -3,10 +3,10 @@
     static class ExitToMainMenuPatch {
         // static Entity Postfix(Entity __result, GameObject _gameObject, string _className)
         static bool Prefix() {
-            Mod.Log($"ExitToMainMenu called");
-            if (Mod.menuTweaks.wantExit) {
-                Mod.Log("We want exit");
-                Mod.menuTweaks.wantExit = false;
+            //Mod.Log($"ExitToMainMenu called");
+            if (Mod.menuTweaks.allowExit) {
+                //Mod.Log("We want exit");
+                Mod.menuTweaks.allowExit = false;
                 return true;
             }
             return false;

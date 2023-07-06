@@ -72,7 +72,7 @@ namespace StormChasers {
         //}
 
         protected override void ConstructPanelContent() {
-            AddButton("Exit", () => { Mod.menuTweaks.wantExit = true; GameController.Instance.exitToMainMenu(); });
+            AddButton("Exit", () => { Mod.menuTweaks.allowExit = true; GameController.Instance.exitToMainMenu(); });
             AddButton("Toggle Menu", () => { Toggle(); });
             #region Debug
             AddButton("List Players", () => { Mod.debugTweaks.ListPlayers(); });
