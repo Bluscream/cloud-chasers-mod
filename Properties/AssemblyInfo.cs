@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using MelonLoader;
-using StormTweakers;
+using StormHackers;
 
 [assembly: MelonInfo(typeof(Mod), "Storm Tweakers", "1.0.0", "Bluscream")]
 [assembly: MelonGame("Little Cloud Games", "Storm Chasers")]

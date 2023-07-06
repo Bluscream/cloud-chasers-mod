@@ -1,14 +1,10 @@
 ﻿using EVP;
 using MelonLoader;
 using StormChasers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using UnityEngine;
 
-namespace StormTweakers {
+namespace StormHackers {
     internal partial class TruckTweaks : MelonMod {
         //private static readonly FieldInfo carInForbiddenZoneMaxTime = typeof(Player).GetField("carInForbiddenZoneMaxTime", BindingFlags.NonPublic | BindingFlags.Instance);
         //private static readonly FieldInfo onlineInactivityTime = typeof(Player).GetField("onlineInactivityTime", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -18,27 +14,35 @@ namespace StormTweakers {
         //private static readonly FieldInfo rightSignalLightOn = typeof(RealisticCarController).GetField("rightSignalLightOn", BindingFlags.NonPublic | BindingFlags.Instance);
 
         #region Truck Methods
-        internal void RepairTruck(CarTornado truck = null) {
+        internal CarTornado GetTruckByPlayer(Player player = null) {
+            if (player is null) return GameController.Instance.getLocalCar();
+            return player.getInteractCar();
+        }
+        internal void Respawn() {
+            if (Mod.isOnline()) return;
+            GameController.Instance.respawnCar(0);
+            TeleportPlayerToTruck();
+            Mod.Log($"Respawned truck");
+        }
+        internal void Repair(CarTornado truck = null) {
             if (Mod.isOnline()) return;
             if (truck is null) truck = GameController.Instance.getLocalCar();
             truck.repairCar();
             Mod.Log($"Repaired truck");
         }
-        internal void RefuelTruck(float fuel = 100f, CarTornado truck = null) {
+        internal void Refuel(float fuel = 100f, CarTornado truck = null) {
             if (Mod.isOnline()) return;
             if (truck is null) truck = GameController.Instance.getLocalCar();
             Mod.Log($"Set fuel from {truck.fuel} to {fuel}");
             truck.fuel = fuel;
         }
-
         internal void SetFuelConsumption(float consumption = .5f, CarTornado truck = null) {
             if (Mod.isOnline()) return;
             if (truck is null) truck = GameController.Instance.getLocalCar();
             Mod.Log($"Set truck consumption from {truck.fuelConsomption} to {consumption}");
             truck.fuelConsomption = consumption;
         }
-
-        internal void SetTruckSpeed(float speed = 27.78f, CarTornado truck = null) {
+        internal void SetSpeed(float speed = 27.78f, CarTornado truck = null) {
             if (Mod.isOnline()) return;
             if (truck is null) truck = GameController.Instance.getLocalCar();
             var controller = (VehicleController)vehicleController.GetValue(truck);
@@ -50,8 +54,7 @@ namespace StormTweakers {
             Mod.Log($"controller.maxDriveForce = {controller.maxDriveForce}");
             controller.maxDriveForce = 999999f;
         }
-
-        internal void SetTruckControl(bool? enabled = null, CarTornado truck = null) {
+        internal void SetControl(bool? enabled = null, CarTornado truck = null) {
             if (Mod.isOnline()) return;
             if (truck is null) truck = GameController.Instance.getLocalCar();
             var truckInput = truck.GetComponent<VehicleInput>();
@@ -60,7 +63,6 @@ namespace StormTweakers {
             var en = truckInput.enabled ? "Enabled" : "Disabled";
             Mod.Log($"{en} Truck Remote Control");
         }
-
         internal void TeleportPlayerToTruck(Player player = null, CarTornado truck = null) {
             if (Mod.isOnline()) return;
             if (player is null) player = GameController.Instance.getLocalPlayer();
@@ -68,7 +70,6 @@ namespace StormTweakers {
             player.transform.position = truck.transform.position + truck.transform.forward * 10f;
             Mod.Log($"Teleported {player.photonView.owner.NickName} to {truck.name}");
         }
-
         internal void TeleportTruckToPlayer(CarTornado truck = null, Player player = null) {
             if (Mod.isOnline()) return;
             if (player is null) player = GameController.Instance.getLocalPlayer();
@@ -80,13 +81,18 @@ namespace StormTweakers {
             if (MainPanel.truckSpeedSlider != null) MainPanel.truckSpeedSlider.value = controller.maxSpeedForward;
             Mod.Log("Max speed: " + controller.maxSpeedForward);
         }
-
-        internal void SetTruckLicensePlate(string front = null, string back = null, CarTornado truck = null) {
+        internal void SetLicensePlate(string front = null, string back = null, CarTornado truck = null) {
             if (Mod.isOnline()) return;
             if (truck is null) truck = GameController.Instance.getLocalCar();
             if (front != null) truck.carLicensePlates[0].text = front;
             if (back != null) truck.carLicensePlates[1].text = back;
             Mod.Log($"Set license plate of {truck.name} to {front} {back}");
+        }
+        internal void TeleportToPos(Vector3 pos, CarTornado truck = null) {
+            if (Mod.isOnline()) return;
+            if (truck is null) truck = GameController.Instance.getLocalCar();
+            truck.transform.position = pos;
+            Mod.Log($"Teleported {truck.name} to {pos}");
         }
         #endregion
     }

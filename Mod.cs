@@ -1,26 +1,21 @@
 ﻿using MelonLoader;
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using UniverseLib;
 using UniverseLib.UI;
 using UniverseLib.Input;
 using StormChasers;
-using System.Collections.Generic;
-using UniverseLib.Utility;
 
-namespace StormTweakers {
+namespace StormHackers {
 
     internal partial class Mod : MelonMod {
-        MelonPreferences_Category cfg_general;
-        MelonPreferences_Entry skip_intro;
         MainPanel mainPanel;
         internal bool fullyLoaded = false;
         internal static MenuTweaks menuTweaks = new MenuTweaks();
         internal static PlayerTweaks playerTweaks = new PlayerTweaks();
         internal static TruckTweaks truckTweaks = new TruckTweaks();
         internal static DebugTweaks debugTweaks = new DebugTweaks();
+        internal static MapTweaks mapTweaks = new MapTweaks();
 
         internal static void Log(object message, LogType type = LogType.Log) {
             var msg = message.ToString();
@@ -29,26 +24,20 @@ namespace StormTweakers {
         }
 
         public override void OnInitializeMelon() {
-            Log("OnInitializeMelon");
-            cfg_general = MelonPreferences.CreateCategory("StormTweakers", "StormTweakers");
-            skip_intro = cfg_general.CreateEntry("skip_intro", true, "Automatically skip intros");
+            Preferences.Init();
         }
 
         public override void OnSceneWasInitialized(int buildindex, string sceneName) {
-            Log($"OnSceneWasInitialized: {buildindex} \"{sceneName}\"");
             if (!fullyLoaded && sceneName == "Main Menu") {
                 fullyLoaded = true;
                 OnMainMenuLoaded();
-            } else if (sceneName == "Splash" && (bool)skip_intro.BoxedValue) {
-                SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
             } else if (sceneName == "Game") {
                 MainPanel.PopulatePlayers();
-                MainPanel.PopulateTrucks();
+                //MainPanel.PopulateTrucks();
             }
         }
 
         internal void OnMainMenuLoaded() {
-            Log("OnMainMenuLoaded");
             menuTweaks.OnMainMenuLoaded();
             Universe.Init(1f, OnUniverseLibInitialized, Log, new UniverseLib.Config.UniverseLibConfig() { Force_Unlock_Mouse = false });
         }

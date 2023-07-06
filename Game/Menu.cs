@@ -1,16 +1,11 @@
 ﻿using MelonLoader;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using UniverseLib;
 
-namespace StormTweakers {
+namespace StormHackers {
     internal partial class MenuTweaks : MelonMod {
         MainUIMenu mainMenu;
         NetworkUIMenu netMenu;
+        public bool wantExit = false;
         private static readonly MethodInfo joinPublicGame = typeof(NetworkUIMenu).GetMethod("joinPublicGame");
 
         internal void OnMainMenuLoaded() {
