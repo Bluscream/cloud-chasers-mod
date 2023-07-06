@@ -4,17 +4,17 @@ using System.Runtime.InteropServices;
 using MelonLoader;
 using StormHackers;
 
-[assembly: MelonInfo(typeof(Mod), "Storm Tweakers", "1.0.0", "Bluscream")]
+[assembly: MelonInfo(typeof(Mod), "Storm Hackers", "1.0.0", "Bluscream")]
 [assembly: MelonGame("Little Cloud Games", "Storm Chasers")]
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Storm Tweakers")]
+[assembly: AssemblyTitle("Storm Hackers")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Storm Tweakers")]
+[assembly: AssemblyProduct("Storm Hackers")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -25,7 +25,7 @@ using StormHackers;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d0ce196a-e8f0-48af-a72f-fb42cbbe6d81")]
+[assembly: Guid("d0ce196a-e8f0-48af-a72f-fbc2cbbe6d81")]
 
 // Version information for an assembly consists of the following four values:
 //

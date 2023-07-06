@@ -56,6 +56,12 @@ namespace StormHackers {
                 menuTweaks.JoinOnlineGame();
             } else if (InputManager.GetKeyDown(Preferences.ToggleLaptopKey.Value)) {
                 GameController.Instance.toggleLaptopMenu();
+            } else if (InputManager.GetKeyDown(Preferences.TeleportForwardKey.Value)) {
+                playerTweaks.TeleportForward(Preferences.TeleportForwardDistance.Value);
+            } else if (InputManager.GetKeyDown(Preferences.TeleportUpKey.Value)) {
+                playerTweaks.TeleportUp(Preferences.TeleportUpDistance.Value);
+            } else if (InputManager.GetKeyDown(Preferences.TeleportDownKey.Value)) {
+                playerTweaks.TeleportUp(-Preferences.TeleportDownDistance.Value);
             }
             //else if (GetKeyDown("leftarrow")) {
             //    var myTruck = GameController.Instance.getLocalCar();
