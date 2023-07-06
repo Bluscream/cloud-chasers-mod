@@ -10,17 +10,14 @@ namespace StormHackers {
 
         public static void Init() {
             var category = MelonPreferences.CreateCategory(baseCategoryName);
+            EnableLogging = category.CreateEntry(nameof(EnableLogging), true, is_hidden:true);
             ToggleModPanelKey = category.CreateEntry(nameof(ToggleModPanelKey), KeyCode.F6);
             ToggleLaptopKey = category.CreateEntry(nameof(ToggleLaptopKey), KeyCode.M);
             QuickJoinKey = category.CreateEntry(nameof(QuickJoinKey), KeyCode.Home);
-
-            category = MelonPreferences.CreateCategory(debugCategoryName);
-            EnableLogging = category.CreateEntry(nameof(EnableLogging), true);
 
             MelonPreferences.Save();
         }
 
         private static readonly string baseCategoryName = "StormHackers";
-        private static readonly string debugCategoryName = baseCategoryName + "_Debug";
     }
 }
