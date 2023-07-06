@@ -94,6 +94,18 @@ namespace StormHackers {
             truck.transform.position = pos;
             Mod.Log($"Teleported {truck.name} to {pos}");
         }
+        internal void TeleportForward(float distance = 5f, CarTornado truck = null) {
+            if (Mod.isOnline()) return;
+            if (truck is null) truck = GameController.Instance.getLocalCar();
+            truck.transform.position += truck.transform.forward * distance;
+            Mod.Log($"Teleported {truck.photonView.owner.NickName} forward {distance} units");
+        }
+        internal void TeleportUp(float distance = 5f, CarTornado truck = null) {
+            if (Mod.isOnline()) return;
+            if (truck is null) truck = GameController.Instance.getLocalCar();
+            truck.transform.position += truck.transform.up * distance;
+            Mod.Log($"Teleported {truck.photonView.owner.NickName} up {distance} units");
+        }
         #endregion
     }
 }

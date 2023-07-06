@@ -88,10 +88,6 @@ namespace StormChasers {
 
             AddButton("Respawn Truck", () => { Mod.truckTweaks.Respawn(); });
             AddButton("Repair Truck", () => { Mod.truckTweaks.Repair(); });
-            AddButton("Teleport to Corwan", () => { Mod.truckTweaks.TeleportToPos(MapTweaks.mapPositions["corwan"], GetTruckFromDropdown()); ; });
-            AddButton("Teleport to Wakota", () => { Mod.truckTweaks.TeleportToPos(MapTweaks.mapPositions["wakota"], GetTruckFromDropdown()); ; });
-            AddButton("Teleport to Byron", () => { Mod.truckTweaks.TeleportToPos(MapTweaks.mapPositions["byron"], GetTruckFromDropdown()); ; });
-            AddButton("Teleport to Middle", () => { Mod.truckTweaks.TeleportToPos(MapTweaks.mapPositions["middle"], GetTruckFromDropdown()); ; });
             AddSlider("Truck Fuel", 100f, 0f, 200f, (float val) => { Mod.truckTweaks.Refuel(val, GetTruckFromDropdown()); });
             AddSlider("Truck Fuel Consumption", .5f, 0f, 2f, (float val) => { Mod.truckTweaks.SetFuelConsumption(val, GetTruckFromDropdown()); });
             AddButton("Teleport Player to Truck", () => { Mod.truckTweaks.TeleportPlayerToTruck(GetPlayerFromDropdown(), GetTruckFromDropdown()); });
@@ -122,6 +118,9 @@ namespace StormChasers {
             UIFactory.CreateToggle(ContentRoot, "", out invincibleToggle, out text);
             invincibleToggle.isOn = false; text.text = "Invincible";
             invincibleToggle.onValueChanged.AddListener((bool value) => { Mod.playerTweaks.SetPlayerInvincible(value, GetPlayerFromDropdown()); });
+            AddButton("Teleport Forward", () => { Mod.playerTweaks.TeleportForward(); });
+            AddButton("Teleport Up", () => { Mod.playerTweaks.TeleportUp(); });
+            AddButton("Teleport Down", () => { Mod.playerTweaks.TeleportUp(-5); });
             AddButton("Teleport Me to Player", () => { Mod.playerTweaks.TeleportPlayerToPlayer(target: GetPlayerFromDropdown()); });
             AddButton("Teleport Player to Me", () => { Mod.playerTweaks.TeleportPlayerToPlayer(GetPlayerFromDropdown()); });
             AddButton("Teleport to Corwan", () => { Mod.playerTweaks.TeleportToPos(MapTweaks.mapPositions["corwan"], GetPlayerFromDropdown()); ; });
@@ -129,6 +128,7 @@ namespace StormChasers {
             AddButton("Teleport to Byron", () => { Mod.playerTweaks.TeleportToPos(MapTweaks.mapPositions["byron"], GetPlayerFromDropdown()); ; });
             AddButton("Teleport to Middle", () => { Mod.playerTweaks.TeleportToPos(MapTweaks.mapPositions["middle"], GetPlayerFromDropdown()); ; });
             #endregion
+            this.SetDefaultSizeAndPosition();
         }
     }
 }
