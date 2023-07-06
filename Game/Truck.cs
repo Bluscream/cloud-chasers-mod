@@ -6,13 +6,12 @@ using UnityEngine;
 
 namespace StormHackers {
     internal partial class TruckTweaks : MelonMod {
-        //private static readonly FieldInfo carInForbiddenZoneMaxTime = typeof(Player).GetField("carInForbiddenZoneMaxTime", BindingFlags.NonPublic | BindingFlags.Instance);
-        //private static readonly FieldInfo onlineInactivityTime = typeof(Player).GetField("onlineInactivityTime", BindingFlags.NonPublic | BindingFlags.Instance);
         private static readonly FieldInfo vehicleController = typeof(CarTornado).GetField("vehicleController", BindingFlags.NonPublic | BindingFlags.Instance);
         private static readonly FieldInfo onlineSpeed = typeof(CarTornado).GetField("onlineSpeed", BindingFlags.NonPublic | BindingFlags.Instance);
-        //private static readonly FieldInfo leftSignalLightOn = typeof(RealisticCarController).GetField("leftSignalLightOn", BindingFlags.NonPublic | BindingFlags.Instance);
-        //private static readonly FieldInfo rightSignalLightOn = typeof(RealisticCarController).GetField("rightSignalLightOn", BindingFlags.NonPublic | BindingFlags.Instance);
-
+        internal static readonly FieldInfo leftSignalLightOn = typeof(RealisticCarController).GetField("leftSignalLightOn", BindingFlags.NonPublic | BindingFlags.Instance);
+        internal static readonly FieldInfo rightSignalLightOn = typeof(RealisticCarController).GetField("rightSignalLightOn", BindingFlags.NonPublic | BindingFlags.Instance);
+        public static bool leftIndicatorOn { get => (bool)leftSignalLightOn.GetValue(GameController.Instance.getLocalCar()); set => leftSignalLightOn.SetValue(GameController.Instance.getLocalCar(), value); }
+        public static bool rightIndicatorOn { get => (bool)rightSignalLightOn.GetValue(GameController.Instance.getLocalCar()); set => rightSignalLightOn.SetValue(GameController.Instance.getLocalCar(), value); }
         #region Truck Methods
         internal CarTornado GetTruckByPlayer(Player player = null) {
             if (player is null) return GameController.Instance.getLocalCar();

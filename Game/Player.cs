@@ -13,6 +13,7 @@ namespace StormHackers {
     internal partial class PlayerTweaks {
         private static readonly FieldInfo isInvincible = typeof(Player).GetField("isInvincible", BindingFlags.NonPublic | BindingFlags.Instance);
         private static readonly FieldInfo onlineInactivityTime = typeof(Player).GetField("onlineInactivityTime", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly FieldInfo carInForbiddenZoneMaxTime = typeof(Player).GetField("carInForbiddenZoneMaxTime", BindingFlags.NonPublic | BindingFlags.Instance);
 
         #region Player Methods
         internal Player GetPlayerByName(string name) {

@@ -39,7 +39,7 @@ namespace StormHackers {
 
         internal void OnMainMenuLoaded() {
             menuTweaks.OnMainMenuLoaded();
-            Universe.Init(1f, OnUniverseLibInitialized, Log, new UniverseLib.Config.UniverseLibConfig() { Force_Unlock_Mouse = false });
+            Universe.Init(1f, OnUniverseLibInitialized, Log, new UniverseLib.Config.UniverseLibConfig() { Force_Unlock_Mouse = Preferences.ForceUnlockMouse.Value });
         }
 
         internal void OnUniverseLibInitialized() {
@@ -49,29 +49,30 @@ namespace StormHackers {
             //mainPanel.SetActive(false);
         }
 
+        public static bool GetKeyDown(KeyCode keyCode) {
+            if (keyCode == KeyCode.None) return false;
+            return InputManager.GetKeyDown(keyCode);
+        }
+
         public override void OnLateUpdate() {
-            if (InputManager.GetKeyDown(Preferences.ToggleModPanelKey.Value)) {
+            if (Preferences.ToggleModPanelKey is null || InputManager.CurrentType == InputType.None) return;
+            if (GetKeyDown(Preferences.ToggleModPanelKey.Value)) {
                 try { mainPanel.Toggle(); } catch { mainPanel.SetActive(!mainPanel.Enabled); }
-            } else if (InputManager.GetKeyDown(Preferences.QuickJoinKey.Value)) {
+            } else if (GetKeyDown(Preferences.QuickJoinKey.Value)) {
                 menuTweaks.JoinOnlineGame();
-            } else if (InputManager.GetKeyDown(Preferences.ToggleLaptopKey.Value)) {
+            } else if (GetKeyDown(Preferences.ToggleLaptopKey.Value)) {
                 GameController.Instance.toggleLaptopMenu();
-            } else if (InputManager.GetKeyDown(Preferences.TeleportForwardKey.Value)) {
+            } else if (GetKeyDown(Preferences.TeleportForwardKey.Value)) {
                 playerTweaks.TeleportForward(Preferences.TeleportForwardDistance.Value);
-            } else if (InputManager.GetKeyDown(Preferences.TeleportUpKey.Value)) {
+            } else if (GetKeyDown(Preferences.TeleportUpKey.Value)) {
                 playerTweaks.TeleportUp(Preferences.TeleportUpDistance.Value);
-            } else if (InputManager.GetKeyDown(Preferences.TeleportDownKey.Value)) {
+            } else if (GetKeyDown(Preferences.TeleportDownKey.Value)) {
                 playerTweaks.TeleportUp(-Preferences.TeleportDownDistance.Value);
+            } else if (GetKeyDown(Preferences.LeftIndicatorKey.Value)) {
+                TruckTweaks.leftIndicatorOn = !TruckTweaks.leftIndicatorOn;
+            } else if (GetKeyDown(Preferences.RightIndicatorKey.Value)) {
+                TruckTweaks.rightIndicatorOn = !TruckTweaks.rightIndicatorOn;
             }
-            //else if (GetKeyDown("leftarrow")) {
-            //    var myTruck = GameController.Instance.getLocalCar();
-            //    var oldValue = (bool)leftSignalLightOn.GetValue(myTruck);
-            //    leftSignalLightOn.SetValue(myTruck, !oldValue);
-            //} else if (GetKeyDown("rightarrow")) {
-            //    var myTruck = GameController.Instance.getLocalCar();
-            //    var oldValue = (bool)rightSignalLightOn.GetValue(myTruck);
-            //    rightSignalLightOn.SetValue(myTruck, !oldValue);
-            //}
         }
 
         internal static bool isOnline() {
