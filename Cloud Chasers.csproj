@@ -7,8 +7,8 @@
     <ProjectGuid>{AD5ABF0D-E1F6-43C4-A8F7-6724C04E332F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StormHackers</RootNamespace>
-    <AssemblyName>StormHackers</AssemblyName>
+    <RootNamespace>CloudChasers</RootNamespace>
+    <AssemblyName>CloudChasers</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>

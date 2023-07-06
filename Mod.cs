@@ -6,7 +6,7 @@ using UniverseLib.UI;
 using UniverseLib.Input;
 using StormChasers;
 
-namespace StormHackers {
+namespace CloudChasers {
 
     internal partial class Mod : MelonMod {
         MainPanel mainPanel;
@@ -44,8 +44,8 @@ namespace StormHackers {
 
         internal void OnUniverseLibInitialized() {
             Log("OnUniverseLibInitialized");
-            UIBase myUIBase = UniversalUI.RegisterUI("bluscream.stormtweakers", () => { });
-            mainPanel = new MainPanel(myUIBase) { Enabled = false };
+            UIBase panel = UniversalUI.RegisterUI("bluscream.stormtweakers", () => { });
+            mainPanel = new MainPanel(panel) { Enabled = false };
         }
 
         public override void OnLateUpdate() {

@@ -2,7 +2,7 @@
 using UniverseLib.UI.Models;
 using UniverseLib.UI;
 using UnityEngine.UI;
-using StormHackers;
+using CloudChasers;
 using System;
 using System.Linq;
 using UniverseLib.Utility;
@@ -126,10 +126,9 @@ namespace StormChasers {
             AddButton("Teleport Down", () => { Mod.playerTweaks.TeleportUp(-5); });
             AddButton("Teleport Me to Player", () => { Mod.playerTweaks.TeleportPlayerToPlayer(target: GetPlayerFromDropdown()); });
             AddButton("Teleport Player to Me", () => { Mod.playerTweaks.TeleportPlayerToPlayer(GetPlayerFromDropdown()); });
-            AddButton("Teleport to Corwan", () => { Mod.playerTweaks.TeleportToPos(MapTweaks.mapPositions["corwan"], GetPlayerFromDropdown()); ; });
-            AddButton("Teleport to Wakota", () => { Mod.playerTweaks.TeleportToPos(MapTweaks.mapPositions["wakota"], GetPlayerFromDropdown()); ; });
-            AddButton("Teleport to Byron", () => { Mod.playerTweaks.TeleportToPos(MapTweaks.mapPositions["byron"], GetPlayerFromDropdown()); ; });
-            AddButton("Teleport to Middle", () => { Mod.playerTweaks.TeleportToPos(MapTweaks.mapPositions["middle"], GetPlayerFromDropdown()); ; });
+            foreach (var pos in Preferences.TeleportLocations.Entries) {
+                AddButton($"Teleport to {pos.DisplayName}", () => { Mod.playerTweaks.TeleportToPos((Vector3)pos.BoxedValue, GetPlayerFromDropdown()); ; });
+            }
             #endregion
             #region Stats
             AddButton("Set Level 0", () => { Mod.statsTweaks.SetXP(0); });
@@ -137,7 +136,6 @@ namespace StormChasers {
             AddButton("Add 5000 xp", () => { Mod.statsTweaks.AddXP(5000); });
             AddSlider("Photo Score Multiplier", Preferences.PhotoScoreMultiplier.Value, 0f, 15f, (float val) => { Mod.Log($"Setting PhotoScoreMultiplier to {val}"); Preferences.PhotoScoreMultiplier.Value = val; });
             #endregion
-            this.SetDefaultSizeAndPosition();
         }
     }
 }

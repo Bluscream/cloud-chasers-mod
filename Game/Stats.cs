@@ -3,7 +3,7 @@ using System.Reflection;
 using static CarTornado;
 using static PlayerBody;
 
-namespace StormHackers {
+namespace CloudChasers {
     internal partial class StatsTweaks {
         private static readonly MethodInfo SetUserData = typeof(OnlineLevel).GetMethod("SetUserData", BindingFlags.Static | BindingFlags.NonPublic);
         private static readonly MethodInfo addXP = typeof(OnlineLevel).GetMethod("addXP", BindingFlags.Static | BindingFlags.NonPublic);

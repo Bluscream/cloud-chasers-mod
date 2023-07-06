@@ -4,7 +4,7 @@ using StormChasers;
 using System.Reflection;
 using UnityEngine;
 
-namespace StormHackers {
+namespace CloudChasers {
     internal partial class TruckTweaks : MelonMod {
         private static readonly FieldInfo vehicleController = typeof(CarTornado).GetField("vehicleController", BindingFlags.NonPublic | BindingFlags.Instance);
         private static readonly FieldInfo onlineSpeed = typeof(CarTornado).GetField("onlineSpeed", BindingFlags.NonPublic | BindingFlags.Instance);

@@ -1,7 +1,7 @@
 ﻿using MelonLoader;
 using System.Reflection;
 
-namespace StormHackers {
+namespace CloudChasers {
     internal partial class MenuTweaks : MelonMod {
         MainUIMenu mainMenu;
         NetworkUIMenu netMenu;

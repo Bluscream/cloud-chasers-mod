@@ -1,4 +1,4 @@
-﻿namespace StormHackers {
+﻿namespace CloudChasers {
     [HarmonyLib.HarmonyPatch(typeof(GameController), nameof(GameController.exitToMainMenu))]
     static class ExitToMainMenuPatch {
         // static Entity Postfix(Entity __result, GameObject _gameObject, string _className)

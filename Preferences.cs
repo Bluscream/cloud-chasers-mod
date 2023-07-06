@@ -1,7 +1,7 @@
 ﻿using MelonLoader;
 using UnityEngine;
 
-namespace StormHackers {
+namespace CloudChasers {
     internal static class Preferences {
         public static MelonPreferences_Entry<bool> EnableLogging { get; private set; }
         public static MelonPreferences_Entry<bool> ForceUnlockMouse { get; private set; }
@@ -23,8 +23,10 @@ namespace StormHackers {
         public static MelonPreferences_Entry<KeyCode> LeftIndicatorKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> RightIndicatorKey { get; private set; }
 
+        public static MelonPreferences_Category TeleportLocations { get; private set; }
+
         public static void Init() {
-            var category = MelonPreferences.CreateCategory(baseCategoryName);
+            var category = MelonPreferences.CreateCategory(baseCategoryName, "Cloud Chasers");
             EnableLogging = category.CreateEntry(nameof(EnableLogging), true, is_hidden: true);
             ForceUnlockMouse = category.CreateEntry(nameof(ForceUnlockMouse), true, is_hidden: true);
             DisableEventSystemOverride = category.CreateEntry(nameof(DisableEventSystemOverride), true, is_hidden: true);
@@ -47,9 +49,17 @@ namespace StormHackers {
             LeftIndicatorKey = category.CreateEntry(nameof(LeftIndicatorKey), KeyCode.None);
             RightIndicatorKey = category.CreateEntry(nameof(RightIndicatorKey), KeyCode.None);
 
+            TeleportLocations = MelonPreferences.CreateCategory(tpCategoryName, "Teleport Locations");
+            TeleportLocations.CreateEntry("Wakota", new Vector3(-1404.233f, 18f, 2016.92f));
+            TeleportLocations.CreateEntry("Top Right", new Vector3(2069.779f, 14f, 2028.77f)); 
+            TeleportLocations.CreateEntry("Middle", new Vector3(-33.8434f, 16f, 35.0814f));
+            TeleportLocations.CreateEntry("Corwan", new Vector3(-1533.423f, 41f, -1838.434f));
+            TeleportLocations.CreateEntry("Byron", new Vector3(2592.014f, 26f, -2448.835f));
+
             MelonPreferences.Save();
         }
 
-        private static readonly string baseCategoryName = "StormHackers";
+        private static readonly string baseCategoryName = "CloudChasers";
+        private static readonly string tpCategoryName = "TeleportLocations";
     }
 }

@@ -5,11 +5,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using StormHackers;
+using CloudChasers;
 using StormChasers;
 using UnityEngine;
 
-namespace StormHackers {
+namespace CloudChasers {
     internal partial class PlayerTweaks {
         private static readonly FieldInfo isInvincible = typeof(Player).GetField("isInvincible", BindingFlags.NonPublic | BindingFlags.Instance);
         private static readonly FieldInfo onlineInactivityTime = typeof(Player).GetField("onlineInactivityTime", BindingFlags.NonPublic | BindingFlags.Instance);

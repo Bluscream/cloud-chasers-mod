@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StormHackers {
+namespace CloudChasers {
     [HarmonyLib.HarmonyPatch(typeof(Snapshot), nameof(StatsTweaks.getPhotoScore))]
     static class GetPhotoScorePatch {
         static void Postfix(ref int __result) {

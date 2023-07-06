@@ -2,19 +2,19 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using MelonLoader;
-using StormHackers;
+using CloudChasers;
 
-[assembly: MelonInfo(typeof(Mod), "Storm Hackers", "1.0.0", "Bluscream")]
+[assembly: MelonInfo(typeof(Mod), "Cloud Chasers", "1.0.0", "Bluscream")]
 [assembly: MelonGame("Little Cloud Games", "Storm Chasers")]
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Storm Hackers")]
+[assembly: AssemblyTitle("Cloud Chasers")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Storm Hackers")]
+[assembly: AssemblyProduct("Cloud Chasers")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
