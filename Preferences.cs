@@ -5,6 +5,9 @@ namespace StormHackers {
     internal static class Preferences {
         public static MelonPreferences_Entry<bool> EnableLogging { get; private set; }
         public static MelonPreferences_Entry<bool> ForceUnlockMouse { get; private set; }
+        public static MelonPreferences_Entry<bool> DisableEventSystemOverride { get; private set; }
+        public static MelonPreferences_Entry<float> StartupDelay { get; private set; }
+
         public static MelonPreferences_Entry<KeyCode> ToggleModPanelKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> ToggleLaptopKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> QuickJoinKey { get; private set; }
@@ -19,8 +22,10 @@ namespace StormHackers {
 
         public static void Init() {
             var category = MelonPreferences.CreateCategory(baseCategoryName);
-            EnableLogging = category.CreateEntry(nameof(EnableLogging), true, is_hidden:true);
-            ForceUnlockMouse = category.CreateEntry(nameof(ForceUnlockMouse), true);
+            EnableLogging = category.CreateEntry(nameof(EnableLogging), true, is_hidden: true);
+            ForceUnlockMouse = category.CreateEntry(nameof(ForceUnlockMouse), true, is_hidden: true);
+            DisableEventSystemOverride = category.CreateEntry(nameof(DisableEventSystemOverride), true, is_hidden: true);
+            StartupDelay = category.CreateEntry(nameof(StartupDelay), 1f, is_hidden: true);
 
             ToggleModPanelKey = category.CreateEntry(nameof(ToggleModPanelKey), KeyCode.F6);
             ToggleLaptopKey = category.CreateEntry(nameof(ToggleLaptopKey), KeyCode.M);

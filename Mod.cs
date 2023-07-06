@@ -39,7 +39,7 @@ namespace StormHackers {
 
         internal void OnMainMenuLoaded() {
             menuTweaks.OnMainMenuLoaded();
-            Universe.Init(1f, OnUniverseLibInitialized, Log, new UniverseLib.Config.UniverseLibConfig() { Force_Unlock_Mouse = Preferences.ForceUnlockMouse.Value });
+            Universe.Init(Preferences.StartupDelay.Value, OnUniverseLibInitialized, Log, new UniverseLib.Config.UniverseLibConfig() { Force_Unlock_Mouse = Preferences.ForceUnlockMouse.Value, Disable_EventSystem_Override = Preferences.DisableEventSystemOverride.Value });
         }
 
         internal void OnUniverseLibInitialized() {
