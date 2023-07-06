@@ -34,7 +34,6 @@ namespace StormHackers {
                 OnMainMenuLoaded();
             } else if (sceneName == "Game") {
                 MainPanel.PopulatePlayers();
-                //MainPanel.PopulateTrucks();
             }
         }
 
@@ -47,13 +46,7 @@ namespace StormHackers {
             Log("OnUniverseLibInitialized");
             UIBase myUIBase = UniversalUI.RegisterUI("bluscream.stormtweakers", () => { });
             mainPanel = new MainPanel(myUIBase) { Enabled = false };
-            //mainPanel.SetActive(false);
         }
-
-        //public static bool GetKeyDown(KeyCode keyCode) {
-        //    if (keyCode == KeyCode.None) return false;
-        //    return InputManager.GetKeyDown(keyCode);
-        //}
 
         public override void OnLateUpdate() {
             if (Preferences.ToggleModPanelKey is null || InputManager.CurrentType == InputType.None) return;
@@ -93,74 +86,5 @@ namespace StormHackers {
             }
             return 1;
         }
-
-        //private Type GetUnityType(string typeName, string moduleName = "CoreModule") {
-        //    return Type.GetType($"UnityEngine.{typeName}, UnityEngine.{moduleName}, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
-        //}
-
-        //private Type GetInputType() {
-        //    return GetUnityType("Input") ?? GetUnityType("Input", "InputLegacyModule");
-        //}
-
-        //private object GetValue(Type type, string propertyName, object instance = null) {
-        //    var property = type.GetProperty(propertyName);
-        //    if (property != null) {
-        //        return property.GetValue(instance, null);
-        //    }
-        //    return type.GetField(propertyName).GetValue(instance);
-        //}
-
-        //private void SetValue(Type type, string propertyName, object value, object instance = null) {
-        //    var property = type.GetProperty(propertyName);
-        //    type.GetProperty(propertyName).SetValue(instance, value, null);
-        //}
-
-        //private bool GetKeyDown(string key) {
-        //    return (bool)GetKeyDownMethod.Invoke(null, new[] { key });
-        //}
     }
 }
-
-
-
-            //if (GetKeyDownMethod == null) return;
-            //if (GetKeyDown("home")) {
-            //    JoinOnlineGame();
-            //} else if (GetKeyDown("f1")) {
-            //    GameController.Instance.updateGPSCameras();
-            //    Log("Updated GPS Cameras");
-            //    //GameController.Instance.respawnCar(1);
-            //    var localPlayer = GameController.Instance.getLocalPlayer();
-            //    SetPlayerInvincible(localPlayer);
-            //    onlineInactivityTime.SetValue(localPlayer, 99999f);
-            //    Log($"Set onlineInactivityTime to 99999f");
-            //    carInForbiddenZoneMaxTime.SetValue(localPlayer, 99999f);
-            //    Log($"Set carInForbiddenZoneMaxTime to 99999f");
-            //    var myTruck = GameController.Instance.getLocalCar();
-            //    RepairTruck(myTruck);
-            //    myTruck.fuelConsomption = 0f;
-            //    Log($"Set fuelConsomption to {myTruck.fuelConsomption}");
-            //    var owner = GameManager.Instance.photonView.owner.NickName;
-            //    Log($"Owner: {owner}");
-            //} else if (GetKeyDown("insert")) {
-            //    TeleportTruckToPlayer();
-            //} else if (GetKeyDown("delete")) {
-            //    TeleportPlayerToTruck();
-            //} else if (GetKeyDown("f6")) {
-            //    SetTruckSpeed(1000f);
-            //} else if (GetKeyDown("f8")) {
-            //    ToggleTruckControl();
-            //} else if (GetKeyDown("f9")) {
-            //    ListRooms();
-            //} else if (GetKeyDown("f10")) {
-            //    ListPlayers();
-            //}
-            //else if (GetKeyDown("leftarrow")) {
-            //    var myTruck = GameController.Instance.getLocalCar();
-            //    var oldValue = (bool)leftSignalLightOn.GetValue(myTruck);
-            //    leftSignalLightOn.SetValue(myTruck, !oldValue);
-            //} else if (GetKeyDown("rightarrow")) {
-            //    var myTruck = GameController.Instance.getLocalCar();
-            //    var oldValue = (bool)rightSignalLightOn.GetValue(myTruck);
-            //    rightSignalLightOn.SetValue(myTruck, !oldValue);
-            //}
