@@ -12,11 +12,10 @@ namespace StormChasers {
             Mod.Log("Local Player:");
             Mod.Log($"#{GameController.Instance.localPlayer.photonView.OwnerActorNr} {GameController.Instance.localPlayer.name} - {GameController.Instance.localPlayer.photonView.owner.NickName}");
             Mod.Log("Other Players:");
-            foreach (var player in GameController.Instance.otherPlayers) {
+            foreach (var player in GameController.Instance.otherPlayers)
                 Mod.Log($"#{player.str()}");
-            }
             Mod.Log("Photon Players:");
-            var photonPlayers = (List<PhotonPlayer>)getOrderedPlayersList.Invoke(GameController.Instance, null); // new object[] { }
+            var photonPlayers = PhotonNetwork.playerList; // = (List<PhotonPlayer>)getOrderedPlayersList.Invoke(GameController.Instance, null); // new object[] { }
             foreach (var player in photonPlayers) {
                 Mod.Log($"#{player.ToStringFull()}");
             }

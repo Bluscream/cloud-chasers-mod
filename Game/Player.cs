@@ -8,6 +8,15 @@ namespace CloudChasers {
         private static readonly FieldInfo isInvincible = typeof(Player).GetField("isInvincible", BindingFlags.NonPublic | BindingFlags.Instance);
         private static readonly FieldInfo onlineInactivityTime = typeof(Player).GetField("onlineInactivityTime", BindingFlags.NonPublic | BindingFlags.Instance);
         private static readonly FieldInfo carInForbiddenZoneMaxTime = typeof(Player).GetField("carInForbiddenZoneMaxTime", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly FieldInfo _moneyAmountToGive = typeof(Player).GetField("moneyAmountToGive", BindingFlags.NonPublic | BindingFlags.Instance);
+
+        public static int moneyAmountToGive {
+            get {
+                return (int)_moneyAmountToGive.GetValue(GameController.Instance.getLocalPlayer());
+        } set {
+                _moneyAmountToGive.SetValue(GameController.Instance.getLocalPlayer(), value);
+            }
+        }
 
         #region Player Methods
         internal Player GetPlayerByName(string name) {
@@ -16,7 +25,7 @@ namespace CloudChasers {
             if (string.IsNullOrWhiteSpace(name)) return null;
             if (name == MainPanel.DefaultDropdownText) player = GameController.Instance.getLocalPlayer();
             else player = GameController.Instance.otherPlayers.FirstOrDefault(p => p.photonView.owner.NickName.Trim() == name);
-            Mod.Log($"GetPlayerByName: {player.str()}");
+            //Mod.Log($"GetPlayerByName: {player.str()}");
             return player;
         }
         internal void SetPlayerInvincible(bool invincible = true, Player player = null) {
