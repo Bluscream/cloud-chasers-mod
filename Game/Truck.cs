@@ -14,13 +14,23 @@ namespace CloudChasers {
         public static bool rightIndicatorOn { get => (bool)rightSignalLightOn.GetValue(GameController.Instance.getLocalCar()); set => rightSignalLightOn.SetValue(GameController.Instance.getLocalCar(), value); }
         #region Truck Methods
         internal CarTornado GetTruckByPlayer(Player player = null) {
-            if (player is null) return GameController.Instance.getLocalCar();
-            return player.getInteractCar();
+            CarTornado car;
+            if (player is null) car = GameController.Instance.getLocalCar();
+            else car = player.getInteractCar();
+            Mod.Log($"GetTruckByPlayer: {car.str()}");
+            return car;
         }
-        internal void Respawn() {
+        internal void Enter(int seatIndex = 0, CarTornado truck = null, Player player = null) {
             if (Mod.isOnline()) return;
-            GameController.Instance.respawnCar(0);
-            TeleportPlayerToTruck();
+            if (truck is null) truck = GameController.Instance.getLocalCar();
+            if (player is null) player = GameController.Instance.getLocalPlayer();
+            truck.enterCar(player, seatIndex, true);
+            Mod.Log($"Entering truck {truck.str()}");
+        }
+        internal void Respawn(CarTornado truck = null, Player player = null) {
+            if (Mod.isOnline()) return;
+            GameController.Instance.respawnCar(1);
+            TeleportTruckToPlayer();
             Mod.Log($"Respawned truck");
         }
         internal void Repair(CarTornado truck = null) {

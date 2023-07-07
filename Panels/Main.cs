@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using UniverseLib.Utility;
 using System.Runtime.InteropServices.WindowsRuntime;
+using ExitGames.Demos.DemoAnimator;
 
 namespace StormChasers {
     internal class MainPanel : UniverseLib.UI.Panels.PanelBase {
@@ -19,6 +20,8 @@ namespace StormChasers {
         public override Vector2 DefaultAnchorMax => new Vector2(0.75f, 0.75f);
         public override bool CanDragAndResize => true;
         public static Slider truckSpeedSlider;
+        public static Player selectedPlayer;
+        public static CarTornado selectedTruck;
         public static Dropdown truckDropdown;
         public static Dropdown playerDropdown;
         public const string DefaultDropdownText = "None / Local";
@@ -59,19 +62,26 @@ namespace StormChasers {
                 if (player?.photonView?.owner?.NickName != null)
                     playerDropdown.options.Add(new Dropdown.OptionData(player.photonView.owner.NickName));
             }
+            selectedPlayer = GameController.Instance.localPlayer;
+            playerDropdown.itemText.text = selectedPlayer?.photonView?.owner?.NickName ?? DefaultDropdownText;
         }
 
         internal CarTornado GetTruckFromDropdown() => GetPlayerFromDropdown().getInteractCar();
-        internal Player GetPlayerFromDropdown() => Mod.playerTweaks.GetPlayerByName(playerDropdown.itemText.text);
+        internal Player GetPlayerFromDropdown() {
+            var text = playerDropdown.itemText.text;
+            var player = Mod.playerTweaks.GetPlayerByName(text);
+            Mod.Log($"GetPlayerFromDropdown: \"{text}\" = \"{player.photonView.owner.NickName}\"");
+            return player;
+        }
 
-        //internal static void PopulateTrucks() {
-        //    truckDropdown.ClearOptions();
-        //    truckDropdown.options.Add(new Dropdown.OptionData("None / Local"));
-        //    foreach (var player in GameController.Instance.otherPlayers) {
-        //        var car = player.getInteractCar();
-        //        truckDropdown.options.Add(new Dropdown.OptionData(player.owner.NickName));
-        //    }
-        //}
+        internal static void PopulateTrucks() {
+            truckDropdown.ClearOptions();
+            truckDropdown.options.Add(new Dropdown.OptionData("None / Local"));
+            foreach (var player in GameController.Instance.otherPlayers) {
+                var car = player.getInteractCar();
+                truckDropdown.options.Add(new Dropdown.OptionData(car.photonView.owner.NickName));
+            }
+        }
 
         protected override void ConstructPanelContent() {
             AddButton("Exit", () => { Mod.menuTweaks.allowExit = true; GameController.Instance.exitToMainMenu(); });
@@ -81,7 +91,9 @@ namespace StormChasers {
             AddButton("List Rooms", () => { Mod.debugTweaks.ListRooms(); });
             #endregion
             AddButton("Reload", () => { PopulatePlayers(); });
-            var playerDropObj = UIFactory.CreateDropdown(ContentRoot, "", out playerDropdown, DefaultDropdownText, 15, (int val) => { });
+            var playerDropObj = UIFactory.CreateDropdown(ContentRoot, "", out playerDropdown, DefaultDropdownText, 15, (int val) => {
+                selectedPlayer = GetPlayerFromDropdown();
+            });
             UIFactory.SetLayoutElement(playerDropObj, minWidth: 200, minHeight: 25);
             #region Truck
             //AddButton("Reload", () => { PopulateTrucks(); });
@@ -95,7 +107,8 @@ namespace StormChasers {
             AddSlider("Truck Fuel Consumption", .5f, 0f, 2f, (float val) => { Mod.truckTweaks.SetFuelConsumption(val, GetTruckFromDropdown()); });
             AddButton("Teleport Player to Truck", () => { Mod.truckTweaks.TeleportPlayerToTruck(GetPlayerFromDropdown(), GetTruckFromDropdown()); });
             AddButton("Teleport Truck to Player", () => { Mod.truckTweaks.TeleportTruckToPlayer(GetTruckFromDropdown(), GetPlayerFromDropdown()); });
-            AddSlider("Truck Speed", 27.78f, 0f, 9999f, (float val) => { Mod.truckTweaks.SetSpeed(val, GetTruckFromDropdown()); });
+            AddButton("Enter Truck", () => { Mod.truckTweaks.Enter(truck: GetTruckFromDropdown(), player: GetPlayerFromDropdown()); });
+            //AddSlider("Truck Speed", 27.78f, 0f, 9999f, (float val) => { Mod.truckTweaks.SetSpeed(val, GetTruckFromDropdown()); });
 
             Toggle truckControlToggle;
             var toggleObj = UIFactory.CreateToggle(ContentRoot, "", out truckControlToggle, out Text text2);
@@ -121,9 +134,9 @@ namespace StormChasers {
             UIFactory.CreateToggle(ContentRoot, "", out invincibleToggle, out text);
             invincibleToggle.isOn = false; text.text = "Invincible";
             invincibleToggle.onValueChanged.AddListener((bool value) => { Mod.playerTweaks.SetPlayerInvincible(value, GetPlayerFromDropdown()); });
-            AddButton("Teleport Forward", () => { Mod.playerTweaks.TeleportForward(); });
-            AddButton("Teleport Up", () => { Mod.playerTweaks.TeleportUp(); });
-            AddButton("Teleport Down", () => { Mod.playerTweaks.TeleportUp(-5); });
+            //AddButton("Teleport Forward", () => { Mod.playerTweaks.TeleportForward(); });
+            //AddButton("Teleport Up", () => { Mod.playerTweaks.TeleportUp(); });
+            //AddButton("Teleport Down", () => { Mod.playerTweaks.TeleportUp(-5); });
             AddButton("Teleport Me to Player", () => { Mod.playerTweaks.TeleportPlayerToPlayer(target: GetPlayerFromDropdown()); });
             AddButton("Teleport Player to Me", () => { Mod.playerTweaks.TeleportPlayerToPlayer(GetPlayerFromDropdown()); });
             foreach (var pos in Preferences.TeleportLocations.Entries) {

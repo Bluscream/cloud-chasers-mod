@@ -7,6 +7,7 @@ namespace CloudChasers {
         public static MelonPreferences_Entry<bool> ForceUnlockMouse { get; private set; }
         public static MelonPreferences_Entry<bool> DisableEventSystemOverride { get; private set; }
         public static MelonPreferences_Entry<float> StartupDelay { get; private set; }
+        public static MelonPreferences_Entry<bool> ToggleModPanelOnESC { get; private set; }
 
         public static MelonPreferences_Entry<float> PhotoScoreMultiplier { get; private set; }
 
@@ -14,6 +15,7 @@ namespace CloudChasers {
         public static MelonPreferences_Entry<KeyCode> ToggleModPanelAltKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> ToggleLaptopKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> QuickJoinKey { get; private set; }
+        public static MelonPreferences_Entry<KeyCode> UnlockMouseKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> TeleportForwardKey { get; private set; }
         public static MelonPreferences_Entry<float> TeleportForwardDistance { get; private set; }
         public static MelonPreferences_Entry<KeyCode> TeleportUpKey { get; private set; }
@@ -27,10 +29,11 @@ namespace CloudChasers {
 
         public static void Init() {
             var category = MelonPreferences.CreateCategory(baseCategoryName, "Cloud Chasers");
-            EnableLogging = category.CreateEntry(nameof(EnableLogging), true, is_hidden: true);
+            EnableLogging = category.CreateEntry(nameof(EnableLogging), true, "Enable Logging", "Wether to enable logging to MelonLoader's Console", is_hidden: true);
             ForceUnlockMouse = category.CreateEntry(nameof(ForceUnlockMouse), true, is_hidden: true);
             DisableEventSystemOverride = category.CreateEntry(nameof(DisableEventSystemOverride), true, is_hidden: true);
             StartupDelay = category.CreateEntry(nameof(StartupDelay), 1f, is_hidden: true);
+            ToggleModPanelOnESC = category.CreateEntry(nameof(ToggleModPanelOnESC), true);
 
             PhotoScoreMultiplier = category.CreateEntry(nameof(PhotoScoreMultiplier), 1f);
 
@@ -38,6 +41,7 @@ namespace CloudChasers {
             ToggleModPanelAltKey = category.CreateEntry(nameof(ToggleModPanelAltKey), KeyCode.None);
             ToggleLaptopKey = category.CreateEntry(nameof(ToggleLaptopKey), KeyCode.M);
             QuickJoinKey = category.CreateEntry(nameof(QuickJoinKey), KeyCode.Home);
+            UnlockMouseKey = category.CreateEntry(nameof(UnlockMouseKey), KeyCode.None);
 
             TeleportForwardKey = category.CreateEntry(nameof(TeleportForwardKey), KeyCode.None);
             TeleportForwardDistance = category.CreateEntry(nameof(TeleportForwardDistance), 5f);

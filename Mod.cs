@@ -9,7 +9,7 @@ using StormChasers;
 namespace CloudChasers {
 
     internal partial class Mod : MelonMod {
-        MainPanel mainPanel;
+        internal static MainPanel mainPanel;
         internal bool fullyLoaded = false;
         internal static MenuTweaks menuTweaks = new MenuTweaks();
         internal static PlayerTweaks playerTweaks = new PlayerTweaks();
@@ -17,6 +17,7 @@ namespace CloudChasers {
         internal static DebugTweaks debugTweaks = new DebugTweaks();
         internal static MapTweaks mapTweaks = new MapTweaks();
         internal static StatsTweaks statsTweaks = new StatsTweaks();
+        internal static NetworkTweaks networkTweaks = new NetworkTweaks();
 
         internal static void Log(object message, LogType type = LogType.Log) {
             var msg = message.ToString();
@@ -32,7 +33,7 @@ namespace CloudChasers {
             if (!fullyLoaded && sceneName == "Main Menu") {
                 fullyLoaded = true;
                 OnMainMenuLoaded();
-            } else if (sceneName == "Game") {
+            } else if (sceneName == "Game") {;
                 MainPanel.PopulatePlayers();
             }
         }
@@ -54,6 +55,8 @@ namespace CloudChasers {
                 try { mainPanel.Toggle(); } catch { mainPanel.SetActive(!mainPanel.Enabled); }
             } else if (InputManager.GetKeyDown(Preferences.QuickJoinKey.Value)) {
                 menuTweaks.JoinOnlineGame();
+            } else if (InputManager.GetKeyDown(Preferences.UnlockMouseKey.Value)) {
+                menuTweaks.UnlockMouse();
             } else if (InputManager.GetKeyDown(Preferences.ToggleLaptopKey.Value)) {
                 GameController.Instance.toggleLaptopMenu();
             } else if (InputManager.GetKeyDown(Preferences.TeleportForwardKey.Value)) {

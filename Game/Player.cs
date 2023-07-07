@@ -1,11 +1,5 @@
-﻿using MelonLoader;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using CloudChasers;
 using StormChasers;
 using UnityEngine;
 
@@ -17,10 +11,13 @@ namespace CloudChasers {
 
         #region Player Methods
         internal Player GetPlayerByName(string name) {
+            Player player;
             name = name.Trim();
             if (string.IsNullOrWhiteSpace(name)) return null;
-            if (name == MainPanel.DefaultDropdownText) return GameController.Instance.getLocalPlayer();
-            return GameController.Instance.otherPlayers.FirstOrDefault(p => p.photonView.owner.NickName.Trim() == name);
+            if (name == MainPanel.DefaultDropdownText) player = GameController.Instance.getLocalPlayer();
+            else player = GameController.Instance.otherPlayers.FirstOrDefault(p => p.photonView.owner.NickName.Trim() == name);
+            Mod.Log($"GetPlayerByName: {player.str()}");
+            return player;
         }
         internal void SetPlayerInvincible(bool invincible = true, Player player = null) {
             if (Mod.isOnline()) return;
@@ -62,6 +59,9 @@ namespace CloudChasers {
             player.transform.position += player.transform.up * distance;
             Mod.Log($"Teleported {player.photonView.owner.NickName} up {distance} units");
         }
+        internal void UnlockDoor(bool _lock = false, Player player = null) {
+            player.interactDoorZone.isLocked = _lock;
+        }
         #endregion
-    }
+      }
 }
