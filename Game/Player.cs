@@ -3,7 +3,7 @@ using System.Reflection;
 using StormChasers;
 using UnityEngine;
 
-namespace CloudChasers {
+namespace StormChasers {
     internal partial class PlayerTweaks {
         private static readonly FieldInfo isInvincible = typeof(Player).GetField("isInvincible", BindingFlags.NonPublic | BindingFlags.Instance);
         private static readonly FieldInfo onlineInactivityTime = typeof(Player).GetField("onlineInactivityTime", BindingFlags.NonPublic | BindingFlags.Instance);

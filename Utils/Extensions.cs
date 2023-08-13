@@ -1,4 +1,4 @@
-﻿namespace CloudChasers {
+﻿namespace StormChasers {
     public static class Extensions {
         public static string getName(this Player player) => player.photonView.owner.NickName;
         public static string str(this Player player) => $@"

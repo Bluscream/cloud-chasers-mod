@@ -2,7 +2,7 @@
 using UniverseLib.UI.Models;
 using UniverseLib.UI;
 using UnityEngine.UI;
-using CloudChasers;
+using StormChasers;
 using System;
 using System.Linq;
 using UniverseLib.Utility;
@@ -13,7 +13,7 @@ namespace StormChasers {
     internal class MainPanel : UniverseLib.UI.Panels.PanelBase {
         internal MainPanel(UIBase owner) : base(owner) { }
         //public bool Active = false;
-        public override string Name => "Storm Tweakers";
+        public override string Name => "Cloud Chasers";
         public override int MinWidth => 40;
         public override int MinHeight => 100;
         public override Vector2 DefaultAnchorMin => new Vector2(0.25f, 0.25f);

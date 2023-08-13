@@ -1,10 +1,10 @@
 ﻿using MelonLoader;
 using System;
 using System.Collections.Generic;
-using CloudChasers;
+using StormChasers;
 using UnityEngine;
 
-namespace CloudChasers {
+namespace StormChasers {
     internal partial class MapTweaks {
         #region Map Methods
         #endregion

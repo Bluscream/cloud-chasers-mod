@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace CloudChasers {
+namespace StormChasers {
     [HarmonyLib.HarmonyPatch(typeof(CarController), nameof(checkMapSizeLimits))]
     static class checkMapSizeLimitsPatch {
         public static readonly MethodInfo checkMapSizeLimits = typeof(GameController).GetMethod("checkMapSizeLimits");

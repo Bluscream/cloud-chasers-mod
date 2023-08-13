@@ -1,7 +1,7 @@
 ﻿using MelonLoader;
 using UnityEngine;
 
-namespace CloudChasers {
+namespace StormChasers {
     internal static class Preferences {
         public static MelonPreferences_Entry<bool> EnableLogging { get; private set; }
         public static MelonPreferences_Entry<bool> ForceUnlockMouse { get; private set; }
