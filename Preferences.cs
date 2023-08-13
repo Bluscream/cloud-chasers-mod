@@ -14,6 +14,7 @@ namespace StormChasers {
 
         public static MelonPreferences_Entry<KeyCode> ToggleModPanelKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> ToggleModPanelAltKey { get; private set; }
+        public static MelonPreferences_Entry<KeyCode> ToggleChatPanelKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> ToggleLaptopKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> QuickJoinKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> UnlockMouseKey { get; private set; }
@@ -41,6 +42,7 @@ namespace StormChasers {
 
             ToggleModPanelKey = category.CreateEntry(nameof(ToggleModPanelKey), KeyCode.F6);
             ToggleModPanelAltKey = category.CreateEntry(nameof(ToggleModPanelAltKey), KeyCode.None);
+            ToggleChatPanelKey = category.CreateEntry(nameof(ToggleChatPanelKey), KeyCode.KeypadEnter);
             ToggleLaptopKey = category.CreateEntry(nameof(ToggleLaptopKey), KeyCode.M);
             QuickJoinKey = category.CreateEntry(nameof(QuickJoinKey), KeyCode.Home);
             UnlockMouseKey = category.CreateEntry(nameof(UnlockMouseKey), KeyCode.None);

@@ -11,7 +11,7 @@ namespace StormChasers {
     internal partial class Mod : MelonMod {
         internal static AssemblyName FileInfo = typeof(Mod).Assembly.GetName();
         internal static MelonInfoAttribute ModInfo = typeof(Mod).Assembly.GetCustomAttribute<MelonInfoAttribute>();
-        internal static MainPanel mainPanel;
+        internal static MainPanel mainPanel; internal static ChatPanel chatPanel;
         internal bool fullyLoaded = false;
         internal static MenuTweaks menuTweaks = new MenuTweaks();
         internal static PlayerTweaks playerTweaks = new PlayerTweaks();
@@ -36,7 +36,6 @@ namespace StormChasers {
                 fullyLoaded = true;
                 OnMainMenuLoaded();
             } else if (sceneName == "Game") {
-                ;
                 MainPanel.PopulatePlayers();
             }
         }
@@ -50,6 +49,7 @@ namespace StormChasers {
             Log("OnUniverseLibInitialized");
             UIBase panel = UniversalUI.RegisterUI("bluscream.stormtweakers", () => { });
             mainPanel = new MainPanel(panel) { Enabled = false };
+            chatPanel = new ChatPanel(panel) { Enabled = false };
         }
 
         public override void OnLateUpdate() {
@@ -72,6 +72,8 @@ namespace StormChasers {
                 TruckTweaks.leftIndicatorOn = !TruckTweaks.leftIndicatorOn;
             } else if (InputManager.GetKeyDown(Preferences.RightIndicatorKey.Value)) {
                 TruckTweaks.rightIndicatorOn = !TruckTweaks.rightIndicatorOn;
+            } else if (InputManager.GetKeyDown(Preferences.ToggleChatPanelKey.Value)) {
+                chatPanel.Toggle();
             }
         }
 

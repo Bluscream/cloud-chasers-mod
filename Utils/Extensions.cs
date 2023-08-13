@@ -8,6 +8,7 @@ playerNameLabelText.text: {player.playerNameLabelText.text}
 owner.NickName: {player.photonView.owner.NickName}
 Position: {player.transform.position}
 Rotation: {player.transform.rotation}";
+
         public static string getName(this CarTornado truck) => truck.name;
         public static string getOwnerName(this CarTornado truck) => truck.photonView.owner.NickName;
         public static string str(this CarTornado truck) => $@"
