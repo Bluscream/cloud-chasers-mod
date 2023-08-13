@@ -4,7 +4,7 @@ using StormChasers;
 using System.Reflection;
 using UnityEngine;
 
-namespace CloudChasers {
+namespace StormChasers {
     internal partial class TruckTweaks : MelonMod {
         private static readonly FieldInfo vehicleController = typeof(CarTornado).GetField("vehicleController", BindingFlags.NonPublic | BindingFlags.Instance);
         private static readonly FieldInfo onlineSpeed = typeof(CarTornado).GetField("onlineSpeed", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -44,6 +44,12 @@ namespace CloudChasers {
             if (truck is null) truck = GameController.Instance.getLocalCar();
             truck.startPushingCar();
             Mod.Log($"Pushing truck");
+        }
+        internal void Flip(CarTornado truck = null) {
+            if (Mod.isOnline()) return;
+            if (truck is null) truck = GameController.Instance.getLocalCar();
+            truck.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            Mod.Log($"Flipping truck");
         }
         internal void Refuel(float fuel = 100f, CarTornado truck = null) {
             if (Mod.isOnline()) return;

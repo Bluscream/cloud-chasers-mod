@@ -1,7 +1,7 @@
 ﻿using MelonLoader;
 using UnityEngine;
 
-namespace CloudChasers {
+namespace StormChasers {
     internal static class Preferences {
         public static MelonPreferences_Entry<bool> EnableLogging { get; private set; }
         public static MelonPreferences_Entry<bool> ForceUnlockMouse { get; private set; }
@@ -10,6 +10,7 @@ namespace CloudChasers {
         public static MelonPreferences_Entry<bool> ToggleModPanelOnESC { get; private set; }
 
         public static MelonPreferences_Entry<float> PhotoScoreMultiplier { get; private set; }
+        public static MelonPreferences_Entry<float> ProbeScoreMultiplier { get; private set; }
 
         public static MelonPreferences_Entry<KeyCode> ToggleModPanelKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> ToggleModPanelAltKey { get; private set; }
@@ -35,7 +36,8 @@ namespace CloudChasers {
             StartupDelay = category.CreateEntry(nameof(StartupDelay), 1f, is_hidden: true);
             ToggleModPanelOnESC = category.CreateEntry(nameof(ToggleModPanelOnESC), true);
 
-            PhotoScoreMultiplier = category.CreateEntry(nameof(PhotoScoreMultiplier), 1f);
+            PhotoScoreMultiplier = category.CreateEntry(nameof(PhotoScoreMultiplier), 1f, "Photo Score Multiplier");
+            ProbeScoreMultiplier = category.CreateEntry(nameof(ProbeScoreMultiplier), 1f, "Probe Score Multiplier");
 
             ToggleModPanelKey = category.CreateEntry(nameof(ToggleModPanelKey), KeyCode.F6);
             ToggleModPanelAltKey = category.CreateEntry(nameof(ToggleModPanelAltKey), KeyCode.None);

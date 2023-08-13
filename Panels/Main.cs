@@ -2,7 +2,7 @@
 using UniverseLib.UI.Models;
 using UniverseLib.UI;
 using UnityEngine.UI;
-using CloudChasers;
+using StormChasers;
 using System;
 using System.Linq;
 using UniverseLib.Utility;
@@ -13,7 +13,7 @@ namespace StormChasers {
     internal class MainPanel : UniverseLib.UI.Panels.PanelBase {
         internal MainPanel(UIBase owner) : base(owner) { }
         //public bool Active = false;
-        public override string Name => "Storm Tweakers";
+        public override string Name => "Cloud Chasers";
         public override int MinWidth => 40;
         public override int MinHeight => 100;
         public override Vector2 DefaultAnchorMin => new Vector2(0.25f, 0.25f);
@@ -32,7 +32,8 @@ namespace StormChasers {
             btn.OnClick += action;
         }
 
-        internal void AddSlider(string text, float value = 50f, float minValue = 0f, float maxValue = 100f, UnityEngine.Events.UnityAction<float> action = null) {
+            internal void AddSlider(string text, int value = 50, int minValue = 0, int maxValue = 100, UnityEngine.Events.UnityAction<int> action = null) => AddSlider(text, (float)value, (float)minValue, (float)maxValue, (float val) => action?.Invoke((int)val));
+            internal void AddSlider(string text, float value = 50f, float minValue = 0f, float maxValue = 100f, UnityEngine.Events.UnityAction<float> action = null) {
             Text sliderTxt = UIFactory.CreateLabel(ContentRoot, "", text);
             UIFactory.SetLayoutElement(sliderTxt.gameObject, minWidth: 200, minHeight: 25);
             var sliderObj = UIFactory.CreateSlider(ContentRoot, "", out truckSpeedSlider);
@@ -84,8 +85,8 @@ namespace StormChasers {
         }
 
         protected override void ConstructPanelContent() {
-            AddButton("Exit", () => { Mod.menuTweaks.allowExit = true; GameController.Instance.exitToMainMenu(); });
-            AddButton("Toggle Menu", () => { Toggle(); });
+            //AddButton("Exit", () => { Mod.menuTweaks.allowExit = true; GameController.Instance.exitToMainMenu(); });
+            //AddButton("Toggle Menu", () => { Toggle(); });
             #region Debug
             AddButton("List Players", () => { Mod.debugTweaks.ListPlayers(); });
             AddButton("List Rooms", () => { Mod.debugTweaks.ListRooms(); });
@@ -103,6 +104,7 @@ namespace StormChasers {
             AddButton("Respawn Truck", () => { Mod.truckTweaks.Respawn(); });
             AddButton("Repair Truck", () => { Mod.truckTweaks.Repair(); });
             AddButton("Push Truck", () => { Mod.truckTweaks.Push(); });
+            AddButton("Flip Truck", () => { Mod.truckTweaks.Flip(); });
             AddSlider("Truck Fuel", 100f, 0f, 200f, (float val) => { Mod.truckTweaks.Refuel(val, GetTruckFromDropdown()); });
             AddSlider("Truck Fuel Consumption", .5f, 0f, 2f, (float val) => { Mod.truckTweaks.SetFuelConsumption(val, GetTruckFromDropdown()); });
             AddButton("Teleport Player to Truck", () => { Mod.truckTweaks.TeleportPlayerToTruck(GetPlayerFromDropdown(), GetTruckFromDropdown()); });
@@ -129,6 +131,7 @@ namespace StormChasers {
             //});
             #endregion
             #region Player
+            AddButton("Kill", () => { GetPlayerFromDropdown().Die(); });
             AddSlider("InactivityTime", 90f, 1f, 99999f, (float val) => { Mod.playerTweaks.SetOnlineInactivityTime(val, GetPlayerFromDropdown()); });
             Toggle invincibleToggle;Text text;
             UIFactory.CreateToggle(ContentRoot, "", out invincibleToggle, out text);
@@ -144,10 +147,14 @@ namespace StormChasers {
             }
             #endregion
             #region Stats
+            AddSlider("Give Money Amount", 50, 0, 5000, (int val) => { Mod.Log($"Setting moneyAmountToGive to {val}"); PlayerTweaks.moneyAmountToGive = val; });
+            AddButton("Get $1000", () => { GameController.Instance.earnMoney(1000); });
+            AddButton("Get $10000", () => { GameController.Instance.earnMoney(100000); });
             AddButton("Set Level 0", () => { Mod.statsTweaks.SetXP(0); });
             AddButton("Set Level 50", () => { Mod.statsTweaks.SetLevel(50); });
             AddButton("Add 5000 xp", () => { Mod.statsTweaks.AddXP(5000); });
-            AddSlider("Photo Score Multiplier", Preferences.PhotoScoreMultiplier.Value, 0f, 15f, (float val) => { Mod.Log($"Setting PhotoScoreMultiplier to {val}"); Preferences.PhotoScoreMultiplier.Value = val; });
+            AddSlider(Preferences.PhotoScoreMultiplier.DisplayName, Preferences.PhotoScoreMultiplier.Value, 0f, 15f, (float val) => { Mod.Log($"Setting {Preferences.PhotoScoreMultiplier.Identifier} to {val}"); Preferences.PhotoScoreMultiplier.Value = val; });
+            AddSlider(Preferences.ProbeScoreMultiplier.DisplayName, Preferences.ProbeScoreMultiplier.Value, 0f, 15f, (float val) => { Mod.Log($"Setting {Preferences.PhotoScoreMultiplier.Identifier} to {val}"); Preferences.ProbeScoreMultiplier.Value = val; });
             #endregion
         }
     }

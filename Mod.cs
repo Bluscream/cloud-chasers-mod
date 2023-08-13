@@ -4,11 +4,13 @@ using UnityEngine;
 using UniverseLib;
 using UniverseLib.UI;
 using UniverseLib.Input;
-using StormChasers;
+using System.Reflection;
 
-namespace CloudChasers {
+namespace StormChasers {
 
     internal partial class Mod : MelonMod {
+        internal static AssemblyName FileInfo = typeof(Mod).Assembly.GetName();
+        internal static MelonInfoAttribute ModInfo = typeof(Mod).Assembly.GetCustomAttribute<MelonInfoAttribute>();
         internal static MainPanel mainPanel;
         internal bool fullyLoaded = false;
         internal static MenuTweaks menuTweaks = new MenuTweaks();

@@ -1,10 +1,10 @@
 ﻿using MelonLoader;
 using System;
 using System.Collections.Generic;
-using CloudChasers;
+using StormChasers;
 using UnityEngine;
 
-namespace CloudChasers {
+namespace StormChasers {
     internal partial class NetworkTweaks {
         #region Network Methods
         internal static void JoinRoom(string name, string password = null) {
