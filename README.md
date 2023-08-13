@@ -1,4 +1,6 @@
-# Cloud Chasers Mod Menu [Melonloader](https://melonwiki.xyz/#/?id=requirements) Mod for [Storm Chasers](https://steamdb.info/app/862800/info/) ![](https://img.shields.io/github/downloads/Bluscream/cloud-chasers-mod/total)
+# Cloud Chasers Mod Menu for [Storm Chasers](https://steamdb.info/app/862800/info/) ![](https://img.shields.io/github/downloads/Bluscream/cloud-chasers-mod/total)
+
+#### Requires [Melonloader](https://melonwiki.xyz/#/?id=requirements)
 
 - If you want to fork and fix or update this, feel free to do so 🙏🏻 
 - You can open the menu by pressing ESC ingame, or using the keybinds `ToggleModPanelKey` and `ToggleModPanelAltKey` from your `Storm Chasers\UsersData\MelonPreferences.cfg` file.
