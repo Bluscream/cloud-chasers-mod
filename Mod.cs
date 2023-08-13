@@ -76,9 +76,10 @@ namespace StormChasers {
         }
 
         internal static bool isOnline() {
-            return false;
-            if (GlobalValues.Instance.gameType != GlobalValues.GameType.SINGLEPLAYER_FREE_ROAMING) {
-                Mod.Log("Remote control in multiplayer will get you banned"); return true;
+            if (GlobalValues.Instance.gameType != GlobalValues.GameType.SINGLEPLAYER_FREE_ROAMING &&
+            GlobalValues.Instance.gameType != GlobalValues.GameType.SINGLEPLAYER_MISSION) {
+                Log("Disabled in multiplayer ಠ_ಠ");
+                return true;
             }
             return false;
         }
