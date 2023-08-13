@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UniverseLib.UI;
-using UniverseLib.UI.Models;
 
 namespace StormChasers {
     internal class MainPanel : UniverseLib.UI.Panels.PanelBase {
@@ -21,15 +19,21 @@ namespace StormChasers {
         public static Dropdown truckDropdown;
         public static Dropdown playerDropdown;
         public const string DefaultDropdownText = "None / Local";
+        public static Dictionary<int, Player> playerCache = new Dictionary<int, Player>();
 
         internal static void PopulatePlayers() {
             playerDropdown.ClearOptions();
+            playerCache.Clear();
             playerDropdown.options.Add(new Dropdown.OptionData(DefaultDropdownText));
-            if (GameController.Instance.localPlayer?.photonView?.owner?.NickName != null)
+            if (GameController.Instance.localPlayer?.photonView?.owner?.NickName != null) {
                 playerDropdown.options.Add(new Dropdown.OptionData(GameController.Instance.localPlayer.photonView.owner.NickName));
+                playerCache.Add(playerDropdown.options.Count - 1, GameController.Instance.localPlayer);
+            }
             foreach (var player in GameController.Instance.otherPlayers) {
-                if (player?.photonView?.owner?.NickName != null)
+                if (player?.photonView?.owner?.NickName != null) {
                     playerDropdown.options.Add(new Dropdown.OptionData(player.photonView.owner.NickName));
+                    playerCache.Add(playerDropdown.options.Count - 1, player);
+                }
             }
             selectedPlayer = GameController.Instance.localPlayer;
             playerDropdown.itemText.text = selectedPlayer?.photonView?.owner?.NickName ?? DefaultDropdownText;
@@ -37,9 +41,8 @@ namespace StormChasers {
 
         internal CarTornado GetTruckFromDropdown() => GetPlayerFromDropdown().getInteractCar();
         internal Player GetPlayerFromDropdown() {
-            var text = playerDropdown.itemText.text;
-            var player = Mod.playerTweaks.GetPlayerByName(text);
-            Mod.Log($"GetPlayerFromDropdown: \"{text}\" = \"{player.photonView.owner.NickName}\"");
+            var player = playerCache[playerDropdown.value];
+            Mod.Log($"GetPlayerFromDropdown: \"{player.photonView.owner.NickName}\"");
             return player;
         }
 
@@ -108,7 +111,7 @@ namespace StormChasers {
             //AddButton("Teleport Forward", () => { Mod.playerTweaks.TeleportForward(); });
             //AddButton("Teleport Up", () => { Mod.playerTweaks.TeleportUp(); });
             //AddButton("Teleport Down", () => { Mod.playerTweaks.TeleportUp(-5); });
-            this.AddButton("Teleport Me to Player", () => { Mod.playerTweaks.TeleportPlayerToPlayer(target: GetPlayerFromDropdown()); });
+            this.AddButton("Teleport Me to Player", () => { Mod.Log("test"); Mod.playerTweaks.TeleportPlayerToPlayer(target: GetPlayerFromDropdown()); });
             this.AddButton("Teleport Player to Me", () => { Mod.playerTweaks.TeleportPlayerToPlayer(GetPlayerFromDropdown()); });
             foreach (var pos in Preferences.TeleportLocations.Entries) {
                 this.AddButton($"Teleport to {pos.DisplayName}", () => { Mod.playerTweaks.TeleportToPos((Vector3)pos.BoxedValue, GetPlayerFromDropdown()); ; });
