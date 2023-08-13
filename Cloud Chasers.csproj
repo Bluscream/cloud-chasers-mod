@@ -76,7 +76,9 @@
     <Compile Include="Mod.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Panels\Chat.cs" />
+    <Compile Include="Panels\Room.cs" />
     <Compile Include="Panels\Main.cs" />
+    <Compile Include="Patches\Network.cs" />
     <Compile Include="Patches\ScoreMultipliers.cs" />
     <Compile Include="Patches\Menu.cs" />
     <Compile Include="Patches\NoLimits.cs" />

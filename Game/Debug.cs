@@ -18,7 +18,7 @@ namespace StormChasers {
             }
         }
 
-        internal void ListRooms() {
+        internal static void ListRooms() {
             foreach (RoomInfo roomInfo in PhotonNetwork.GetRoomList()) {
                 Mod.Log($"Room: {roomInfo.Name} ({roomInfo.PlayerCount}/{roomInfo.MaxPlayers})\n\t{roomInfo.ToStringFull()}");
             }

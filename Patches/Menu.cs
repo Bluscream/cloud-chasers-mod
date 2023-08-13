@@ -34,7 +34,11 @@ namespace StormChasers {
     [HarmonyLib.HarmonyPatch(typeof(GameController), nameof(GameController.togglePause))]
     static class PauseMenuPatch {
         static void Prefix(GameController __instance) {
-            if (Preferences.ToggleModPanelOnESC.Value) Mod.mainPanel.SetActive(!__instance.isPause);
+            if (Preferences.ToggleModPanelOnESC.Value) {
+                Mod.mainPanel.SetActive(!__instance.isPause);
+                Mod.chatPanel.SetActive(!__instance.isPause);
+                //Mod.roomPanel.SetActive(!__instance.isPause);
+            }
         }
     }
 }

@@ -22,8 +22,6 @@ namespace StormChasers {
         public static Dropdown playerDropdown;
         public const string DefaultDropdownText = "None / Local";
 
-
-
         internal static void PopulatePlayers() {
             playerDropdown.ClearOptions();
             playerDropdown.options.Add(new Dropdown.OptionData(DefaultDropdownText));

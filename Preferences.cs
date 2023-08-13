@@ -15,8 +15,17 @@ namespace StormChasers {
         public static MelonPreferences_Entry<KeyCode> ToggleModPanelKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> ToggleModPanelAltKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> ToggleChatPanelKey { get; private set; }
+        public static MelonPreferences_Entry<KeyCode> ToggleRoomPanelKey { get; private set; }
+        public static MelonPreferences_Entry<KeyCode> TogglePlayerPanelKey { get; private set; }
+        public static MelonPreferences_Entry<KeyCode> ToggleTruckPanelKey { get; private set; }
+        public static MelonPreferences_Entry<KeyCode> ToggleStormPanelKey { get; private set; }
+        public static MelonPreferences_Entry<KeyCode> ToggleTeleportPanelKey { get; private set; }
+
         public static MelonPreferences_Entry<KeyCode> ToggleLaptopKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> QuickJoinKey { get; private set; }
+        public static MelonPreferences_Entry<KeyCode> ExitToMainMenuKey { get; private set; }
+        public static MelonPreferences_Entry<KeyCode> ExitGameKey { get; private set; }
+        public static MelonPreferences_Entry<KeyCode> RestartGameKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> UnlockMouseKey { get; private set; }
         public static MelonPreferences_Entry<KeyCode> TeleportForwardKey { get; private set; }
         public static MelonPreferences_Entry<float> TeleportForwardDistance { get; private set; }
@@ -40,12 +49,20 @@ namespace StormChasers {
             PhotoScoreMultiplier = category.CreateEntry(nameof(PhotoScoreMultiplier), 1f, "Photo Score Multiplier");
             ProbeScoreMultiplier = category.CreateEntry(nameof(ProbeScoreMultiplier), 1f, "Probe Score Multiplier");
 
-            ToggleModPanelKey = category.CreateEntry(nameof(ToggleModPanelKey), KeyCode.F6);
-            ToggleModPanelAltKey = category.CreateEntry(nameof(ToggleModPanelAltKey), KeyCode.None);
-            ToggleChatPanelKey = category.CreateEntry(nameof(ToggleChatPanelKey), KeyCode.KeypadEnter);
+            ToggleModPanelKey = category.CreateEntry(nameof(ToggleModPanelKey), KeyCode.Keypad0);
+            ToggleModPanelAltKey = category.CreateEntry(nameof(ToggleModPanelAltKey), KeyCode.F6);
+            ToggleChatPanelKey = category.CreateEntry(nameof(ToggleChatPanelKey), KeyCode.U);
+            ToggleRoomPanelKey = category.CreateEntry(nameof(ToggleRoomPanelKey), KeyCode.Keypad1);
+            TogglePlayerPanelKey = category.CreateEntry(nameof(TogglePlayerPanelKey), KeyCode.Keypad2);
+            ToggleTruckPanelKey = category.CreateEntry(nameof(ToggleTruckPanelKey), KeyCode.Keypad3);
+            ToggleTeleportPanelKey = category.CreateEntry(nameof(ToggleTeleportPanelKey), KeyCode.Keypad4);
+
             ToggleLaptopKey = category.CreateEntry(nameof(ToggleLaptopKey), KeyCode.M);
             QuickJoinKey = category.CreateEntry(nameof(QuickJoinKey), KeyCode.Home);
             UnlockMouseKey = category.CreateEntry(nameof(UnlockMouseKey), KeyCode.None);
+            ExitToMainMenuKey = category.CreateEntry(nameof(ExitToMainMenuKey), KeyCode.F11);
+            ExitGameKey = category.CreateEntry(nameof(ExitGameKey), KeyCode.None);
+            RestartGameKey = category.CreateEntry(nameof(RestartGameKey), KeyCode.None);
 
             TeleportForwardKey = category.CreateEntry(nameof(TeleportForwardKey), KeyCode.None);
             TeleportForwardDistance = category.CreateEntry(nameof(TeleportForwardDistance), 5f);
