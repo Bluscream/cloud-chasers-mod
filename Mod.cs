@@ -1,10 +1,10 @@
 ﻿using MelonLoader;
 using System;
+using System.Reflection;
 using UnityEngine;
 using UniverseLib;
-using UniverseLib.UI;
 using UniverseLib.Input;
-using System.Reflection;
+using UniverseLib.UI;
 
 namespace StormChasers {
 
@@ -35,7 +35,8 @@ namespace StormChasers {
             if (!fullyLoaded && sceneName == "Main Menu") {
                 fullyLoaded = true;
                 OnMainMenuLoaded();
-            } else if (sceneName == "Game") {;
+            } else if (sceneName == "Game") {
+                ;
                 MainPanel.PopulatePlayers();
             }
         }

@@ -1,13 +1,9 @@
-﻿using UnityEngine;
-using UniverseLib.UI.Models;
-using UniverseLib.UI;
-using UnityEngine.UI;
-using StormChasers;
-using System;
+﻿using System;
 using System.Linq;
-using UniverseLib.Utility;
-using System.Runtime.InteropServices.WindowsRuntime;
-using ExitGames.Demos.DemoAnimator;
+using UnityEngine;
+using UnityEngine.UI;
+using UniverseLib.UI;
+using UniverseLib.UI.Models;
 
 namespace StormChasers {
     internal class MainPanel : UniverseLib.UI.Panels.PanelBase {
@@ -32,8 +28,8 @@ namespace StormChasers {
             btn.OnClick += action;
         }
 
-            internal void AddSlider(string text, int value = 50, int minValue = 0, int maxValue = 100, UnityEngine.Events.UnityAction<int> action = null) => AddSlider(text, (float)value, (float)minValue, (float)maxValue, (float val) => action?.Invoke((int)val));
-            internal void AddSlider(string text, float value = 50f, float minValue = 0f, float maxValue = 100f, UnityEngine.Events.UnityAction<float> action = null) {
+        internal void AddSlider(string text, int value = 50, int minValue = 0, int maxValue = 100, UnityEngine.Events.UnityAction<int> action = null) => AddSlider(text, (float)value, (float)minValue, (float)maxValue, (float val) => action?.Invoke((int)val));
+        internal void AddSlider(string text, float value = 50f, float minValue = 0f, float maxValue = 100f, UnityEngine.Events.UnityAction<float> action = null) {
             Text sliderTxt = UIFactory.CreateLabel(ContentRoot, "", text);
             UIFactory.SetLayoutElement(sliderTxt.gameObject, minWidth: 200, minHeight: 25);
             var sliderObj = UIFactory.CreateSlider(ContentRoot, "", out truckSpeedSlider);
@@ -133,7 +129,7 @@ namespace StormChasers {
             #region Player
             AddButton("Kill", () => { GetPlayerFromDropdown().Die(); });
             AddSlider("InactivityTime", 90f, 1f, 99999f, (float val) => { Mod.playerTweaks.SetOnlineInactivityTime(val, GetPlayerFromDropdown()); });
-            Toggle invincibleToggle;Text text;
+            Toggle invincibleToggle; Text text;
             UIFactory.CreateToggle(ContentRoot, "", out invincibleToggle, out text);
             invincibleToggle.isOn = false; text.text = "Invincible";
             invincibleToggle.onValueChanged.AddListener((bool value) => { Mod.playerTweaks.SetPlayerInvincible(value, GetPlayerFromDropdown()); });

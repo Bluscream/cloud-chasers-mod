@@ -1,5 +1,4 @@
-﻿using MelonLoader;
-using System.Reflection;
+﻿using System.Reflection;
 using static CarTornado;
 using static PlayerBody;
 
@@ -11,7 +10,7 @@ namespace StormChasers {
 
         #region Stats Methods
         internal void AddXP(int xp = 1) {
-            
+
             Mod.Log($"Adding {xp} XP");
             addXP.Invoke(null, new object[] { xp });
         }

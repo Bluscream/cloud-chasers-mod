@@ -57,7 +57,7 @@ namespace StormChasers {
 
             TeleportLocations = MelonPreferences.CreateCategory(tpCategoryName, "Teleport Locations");
             TeleportLocations.CreateEntry("Wakota", new Vector3(-1404.233f, 18f, 2016.92f));
-            TeleportLocations.CreateEntry("Top Right", new Vector3(2069.779f, 14f, 2028.77f)); 
+            TeleportLocations.CreateEntry("Top Right", new Vector3(2069.779f, 14f, 2028.77f));
             TeleportLocations.CreateEntry("Middle", new Vector3(-33.8434f, 16f, 35.0814f));
             TeleportLocations.CreateEntry("Corwan", new Vector3(-1533.423f, 41f, -1838.434f));
             TeleportLocations.CreateEntry("Byron", new Vector3(2592.014f, 26f, -2448.835f));

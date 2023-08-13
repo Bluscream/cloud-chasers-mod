@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AD5ABF0D-E1F6-43C4-A8F7-6724C04E332F}</ProjectGuid>
+    <ProjectGuid>{10F966DD-2018-4600-A43A-0432EB3D2343}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CloudChasers</RootNamespace>

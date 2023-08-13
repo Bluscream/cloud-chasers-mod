@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Reflection;
-using StormChasers;
 using UnityEngine;
 
 namespace StormChasers {
@@ -13,7 +12,8 @@ namespace StormChasers {
         public static int moneyAmountToGive {
             get {
                 return (int)_moneyAmountToGive.GetValue(GameController.Instance.getLocalPlayer());
-        } set {
+            }
+            set {
                 _moneyAmountToGive.SetValue(GameController.Instance.getLocalPlayer(), value);
             }
         }
@@ -72,5 +72,5 @@ namespace StormChasers {
             player.interactDoorZone.isLocked = _lock;
         }
         #endregion
-      }
+    }
 }
